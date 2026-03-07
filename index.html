@@ -373,7 +373,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
     <div class="card red-accent" data-cat="apps" onclick="showBlog('murder')">
       <div class="card-corner"></div>
       <div class="card-tag"><span class="dot dot-red"></span>Side Project · Shipped</div>
-      <div class="card-title">Whodunit</div>
+      <div class="card-title">whodunnit</div>
       <div class="card-body">A fully AI-generated murder mystery game where tone, setting, and difficulty unlock a unique case every time. Eight screens, procedural suspects, a locked killer reveal.</div>
       <span class="card-metric">AI-generated</span><span class="card-metric">Noir UI</span>
       <div class="card-read-more">Read the build story</div>
@@ -571,13 +571,13 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 </div>
 
 
-<!-- BLOG: WHODUNIT -->
+<!-- BLOG: whodunnit -->
 <div id="page-blog-murder" class="page">
 <div class="container">
   <div class="blog-back" onclick="goHome()">Back to portfolio</div>
   <header class="blog-header">
     <div class="blog-eyebrow">Product Case Study · Side Project</div>
-    <h1 class="blog-title">Building Whodunit: what a murder mystery game taught me about AI product design, narrative coherence, and the PRD as a spec tool.</h1>
+    <h1 class="blog-title">Building Whodunnit: what a murder mystery game taught me about AI product design, narrative coherence, and the PRD as a spec tool.</h1>
     <div class="blog-meta"><span>March 2026</span><span>10 min read</span><span>Product Management · AI Systems · Game Design · Lovable</span></div>
   </header>
 
@@ -585,15 +585,15 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 
     <div class="try-it">
       <div class="try-it-text">
-        <strong>🔪 Try it — whodunit.lovable.app</strong>
+        <strong>🔪 Try it — whodunnit.lovable.app</strong>
         Pick a tone, setting, difficulty, and detective avatar. An AI generates your entire case — unique suspects, alibis, evidence, red herrings, and a pre-committed killer. No two mysteries are the same.
       </div>
-      <a href="https://whodunit.lovable.app" target="_blank" class="try-it-btn">Play Whodunit →</a>
+      <a href="https://whodunnit.lovable.app" target="_blank" class="try-it-btn">Play whodunnit →</a>
     </div>
 
-    <p>Most games lie to you about replayability. They shuffle the same deck. Whodunit does something different: it generates the entire mystery from scratch every session — different victim, different killer, different motive, different evidence trail — driven entirely by the tone, setting, and difficulty you configure at the start. The AI is not filling in a template. It is writing a new case.</p>
+    <p>Most games lie to you about replayability. They shuffle the same deck. whodunnit does something different: it generates the entire mystery from scratch every session — different victim, different killer, different motive, different evidence trail — driven entirely by the tone, setting, and difficulty you configure at the start. The AI is not filling in a template. It is writing a new case.</p>
 
-    <p>What I want to document here isn't the build. It's the product thinking behind it — the decisions that shaped what Whodunit is, what it isn't, and why those boundaries matter.</p>
+    <p>What I want to document here isn't the build. It's the product thinking behind it — the decisions that shaped what whodunnit is, what it isn't, and why those boundaries matter.</p>
 
     <h2>The problem I was actually solving</h2>
 
@@ -608,7 +608,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 
     <h2>The one constraint that defined everything</h2>
 
-    <p>The most important product decision in Whodunit was not a feature. It was a constraint: the killer's identity is committed at generation time, not at reveal time.</p>
+    <p>The most important product decision in whodunnit was not a feature. It was a constraint: the killer's identity is committed at generation time, not at reveal time.</p>
 
     <p>This sounds obvious, but it has significant technical implications. The AI cannot retroactively assign a killer based on which suspects the player investigated most. The LLM must generate victim, suspects, evidence trail, red herrings, and alibi inconsistencies all pointing at a pre-determined person, in a single coherent generation call. The killer was always the same person. The evidence always pointed there. You were just finding it.</p>
 
@@ -627,7 +627,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 
     <h2>Eight screens, each with one job</h2>
 
-    <p>Whodunit is an eight-screen investigation arc. What took the most spec work wasn't the screens that do the most — it was defining what each screen and only that screen is responsible for.</p>
+    <p>whodunnit is an eight-screen investigation arc. What took the most spec work wasn't the screens that do the most — it was defining what each screen and only that screen is responsible for.</p>
 
     <p>The briefing screen establishes the scene before introducing suspects. That ordering is deliberate: reading the crime before meeting the cast means the player approaches suspects with context rather than meeting them cold. The evidence board uses tiered unlocking — Tier 1 clues are available immediately, Tier 2 and 3 unlock as earlier evidence is examined. Players cannot skip to the most incriminating evidence. Investigation has structure.</p>
 
@@ -648,7 +648,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 
     <h2>What writing the PRD before building actually changed</h2>
 
-    <p>I wrote a complete PRD before opening Lovable. I've written about why I do this with Bubble Bloom — but Whodunit pushed it further, because the domain (AI-generated game narrative) has higher stakes for specification failures. Vague intentions in a relaxation app produce mediocre outputs. Vague intentions in a mystery game produce an AI that contradicts itself halfway through a case.</p>
+    <p>I wrote a complete PRD before opening Lovable. I've written about why I do this with Bubble Bloom — but whodunnit pushed it further, because the domain (AI-generated game narrative) has higher stakes for specification failures. Vague intentions in a relaxation app produce mediocre outputs. Vague intentions in a mystery game produce an AI that contradicts itself halfway through a case.</p>
 
     <ul class="learning-list">
       <li><span class="learning-num">01</span><span class="learning-text"><strong>The PRD is the prompt</strong> — Every screen described in precise detail in the PRD became a reliable generation prompt with minimal revision. Every screen described vaguely cost three to five revision cycles. "A screen where users examine clues" generates a generic interface. "A grid of evidence cards with atmospheric icons, tiered unlock based on examination progress, and a modal containing full clue text plus three investigative choices that produce AI-generated unique outcomes" generates what I actually wanted.</span></li>
@@ -668,7 +668,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 
   <div class="blog-bottom-nav">
     <span class="back-link" onclick="goHome()">Back to portfolio</span>
-    <span>Whodunit · March 2026</span>
+    <span>whodunnit · March 2026</span>
   </div>
 </div>
 </div>
