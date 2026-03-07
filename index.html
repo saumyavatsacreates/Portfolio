@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saumya Vatsa — Product × Strategy × AI-first</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #F0F0F0;
+  --ink:    #121212;
+  --red:    #D02020;
+  --blue:   #1040C0;
+  --yellow: #F0C020;
+  --muted:  #E0E0E0;
+  --white:  #FFFFFF;
+  --border: 4px solid #121212;
+  --border2: 2px solid #121212;
+  --shadow-sm:  4px 4px 0px 0px #121212;
+  --shadow-md:  6px 6px 0px 0px #121212;
+  --shadow-lg:  8px 8px 0px 0px #121212;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 500; overflow-x: hidden; cursor: none; }
+.cursor { width: 12px; height: 12px; background: var(--red); border-radius: 0; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .12s, height .12s, background .12s; }
+.cursor.big { width: 40px; height: 40px; background: var(--yellow); border-radius: 0; }
+@media(hover:none) { .cursor { display: none; } body { cursor: auto; } }
+.page { display: none; }
+.page.active { display: block; }
+.container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+@media(max-width:640px) { .container { padding: 0 20px; } }
+
+/* NAV */
+.nav-wrap { position: sticky; top: 0; z-index: 100; background: var(--ink); border-bottom: var(--border); }
+nav { padding: 0 48px; display: flex; align-items: stretch; justify-content: space-between; height: 64px; }
+.nav-brand { display: flex; align-items: center; gap: 12px; cursor: pointer; border-right: var(--border); padding-right: 24px; }
+.nav-shapes { display: flex; gap: 6px; align-items: center; }
+.nav-shape-circle { width: 16px; height: 16px; border-radius: 50%; background: var(--red); }
+.nav-shape-square { width: 16px; height: 16px; background: var(--yellow); }
+.nav-shape-tri { width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; border-bottom: 16px solid var(--blue); }
+.nav-name { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--white); line-height: 1; }
+.nav-tagline { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-top: 2px; }
+.nav-links { display: flex; }
+.nav-link { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; padding: 0 24px; background: transparent; color: rgba(255,255,255,.7); cursor: pointer; border: none; border-left: 2px solid rgba(255,255,255,.12); transition: color .15s, background .15s; display: flex; align-items: center; }
+.nav-link:hover { color: var(--yellow); background: rgba(255,255,255,.06); }
+
+/* HERO */
+.hero-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 64px); border-bottom: var(--border); }
+.hero-left { padding: 72px 64px 72px 48px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; background: var(--bg); border-right: var(--border); }
+.hero-geo-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.hero-geo-bg .geo-circle-lg { position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; border: 40px solid rgba(16,64,192,.08); }
+.hero-geo-bg .geo-rect { position: absolute; bottom: 60px; left: 0; width: 6px; height: 200px; background: var(--red); }
+.hero-geo-bg .geo-dot-grid { position: absolute; inset: 0; background-image: radial-gradient(#12121212 1.5px, transparent 1.5px); background-size: 28px 28px; }
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.hero-eyebrow-bar { width: 40px; height: 4px; background: var(--red); flex-shrink: 0; }
+.hero-eyebrow-text { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--red); }
+.hero-headline { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: clamp(44px, 5vw, 80px); line-height: .95; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 32px; position: relative; z-index: 1; }
+.hero-headline .line-accent { color: var(--blue); }
+.hero-headline .line-italic { font-style: italic; font-weight: 900; color: var(--red); display: block; }
+.hero-body { font-size: 14px; line-height: 1.85; color: #3a3a3a; max-width: 480px; margin-bottom: 40px; position: relative; z-index: 1; font-weight: 500; }
+.hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
+.btn { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; padding: 14px 28px; border: var(--border2); cursor: pointer; transition: transform .15s ease-out, box-shadow .15s ease-out, background .15s; border-radius: 0; display: inline-flex; align-items: center; gap: 8px; }
+.btn-red { background: var(--red); color: var(--white); border-color: var(--ink); box-shadow: var(--shadow-sm); }
+.btn-red:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-md); }
+.btn-red:active { transform: translate(2px,2px); box-shadow: none; }
+.btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); box-shadow: var(--shadow-sm); }
+.btn-outline:hover { background: var(--ink); color: var(--white); transform: translate(-2px,-2px); box-shadow: var(--shadow-md); }
+.btn-outline:active { transform: translate(2px,2px); box-shadow: none; }
+
+/* HERO RIGHT */
+.hero-right { background: var(--blue); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 40px; gap: 16px; }
+.hero-right-geo { position: absolute; inset: 0; pointer-events: none; }
+.hrgeo-circle { position: absolute; top: -60px; right: -60px; width: 260px; height: 260px; border-radius: 50%; background: rgba(240,192,32,.18); }
+.hrgeo-sq { position: absolute; bottom: 30px; left: 30px; width: 90px; height: 90px; background: rgba(208,32,32,.22); transform: rotate(45deg); }
+.hrgeo-tri { position: absolute; top: 50%; right: 24px; transform: translateY(-50%); width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 70px solid rgba(255,255,255,.1); }
+.photo-cards { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; gap: 12px; width: 100%; max-width: 380px; position: relative; z-index: 2; }
+.photo-card { border: 3px solid rgba(255,255,255,.7); box-shadow: 5px 5px 0px 0px rgba(0,0,0,.4); transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease; position: relative; overflow: hidden; cursor: pointer; background: rgba(0,0,0,.2); }
+.photo-card:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 8px 12px 0px 0px rgba(0,0,0,.5); z-index: 5; }
+.photo-card:nth-child(1) { grid-column:1; grid-row:1; background: #c4522a; }
+.photo-card:nth-child(2) { grid-column:2; grid-row:1/3; }
+.photo-card:nth-child(3) { grid-column:1; grid-row:2; background: var(--ink); }
+.photo-card-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 14px 12px; overflow: hidden; }
+.photo-card:nth-child(1) .photo-card-inner { background: linear-gradient(150deg, #c4522a 0%, #9c3a1e 100%); }
+.photo-card:nth-child(1) .photo-card-inner::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; border-radius: 50%; border: 32px solid rgba(255,255,255,.15); }
+.photo-card:nth-child(2) .photo-card-inner { background: var(--ink); background-image: repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(255,255,255,.04) 23px, rgba(255,255,255,.04) 24px), repeating-linear-gradient(90deg, transparent, transparent 23px, rgba(255,255,255,.04) 23px, rgba(255,255,255,.04) 24px); }
+.photo-card:nth-child(2) .photo-card-inner::before { content: ''; position: absolute; top: 20px; left: 16px; width: 44px; height: 44px; background: var(--yellow); opacity: .6; transform: rotate(18deg); }
+.photo-card:nth-child(3) .photo-card-inner { background: linear-gradient(140deg, #2a5c3a 0%, #1e3d28 100%); }
+.photo-card:nth-child(3) .photo-card-inner::before { content: ''; position: absolute; top: -20px; right: -20px; width: 0; height: 0; border-left: 80px solid transparent; border-bottom: 80px solid rgba(255,255,255,.12); }
+.photo-person { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 65%; max-width: 140px; opacity: .2; pointer-events: none; }
+.photo-label { position: relative; z-index: 2; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.9); line-height: 1; }
+.photo-num { position: absolute; top: 10px; right: 12px; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 42px; line-height: 1; color: rgba(255,255,255,.1); pointer-events: none; z-index: 1; }
+.photo-hint { position: relative; z-index: 2; font-size: 7px; letter-spacing: .1em; color: rgba(255,255,255,.45); font-weight: 500; margin-top: 3px; border: 1px dashed rgba(255,255,255,.25); padding: 2px 6px; display: inline-block; }
+.photo-star { position: absolute; top: 80px; right: 14px; font-size: 24px; color: var(--yellow); opacity: .7; z-index: 3; animation: spinSlow 8s linear infinite; display: inline-block; }
+.photo-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 10; }
+.photo-card:nth-child(1)::before { background: var(--yellow); }
+.photo-card:nth-child(2)::before { background: linear-gradient(90deg, var(--red), var(--yellow)); }
+.photo-card:nth-child(3)::before { background: var(--red); }
+
+/* STATS */
+.stats { background: var(--yellow); display: grid; grid-template-columns: repeat(4,1fr); border-bottom: var(--border); }
+.stat { padding: 32px 40px; border-right: var(--border); position: relative; }
+.stat:last-child { border-right: none; }
+.stat-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 42px; line-height: 1; margin-bottom: 6px; color: var(--ink); }
+.stat-label { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: rgba(18,18,18,.7); font-weight: 700; }
+.stat::after { content: ''; position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 20px solid rgba(18,18,18,.12); border-left: 20px solid transparent; }
+
+/* SECTION HEADERS */
+.section-head { display: flex; align-items: center; gap: 20px; padding: 64px 0 28px; }
+.section-title { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--blue); white-space: nowrap; }
+.section-line { flex: 1; height: 4px; background: var(--ink); }
+.section-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 11px; letter-spacing: .1em; color: rgba(18,18,18,.2); }
+
+/* FILTER TABS */
+.filter-tabs { display: flex; gap: 0; flex-wrap: nowrap; margin-bottom: 32px; border: var(--border); width: fit-content; }
+.filter-btn { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; padding: 10px 20px; border: none; border-right: var(--border2); background: var(--white); color: rgba(18,18,18,.5); cursor: pointer; transition: background .15s, color .15s; }
+.filter-btn:last-child { border-right: none; }
+.filter-btn:hover { background: var(--muted); color: var(--ink); }
+.filter-btn.active { background: var(--red); color: var(--white); }
+
+/* WORK GRID */
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 80px; border-top: var(--border); border-left: var(--border); }
+.card { background: var(--white); padding: 32px 28px; border-right: var(--border); border-bottom: var(--border); transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease; position: relative; overflow: hidden; cursor: pointer; }
+.card:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); z-index: 2; }
+.card-corner { position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 28px solid var(--ink); border-left: 28px solid transparent; opacity: .12; }
+.card.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.card-tag { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: rgba(18,18,18,.5); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.dot { width: 6px; height: 6px; flex-shrink: 0; }
+.dot-red { background: var(--red); }
+.dot-blue { background: var(--blue); }
+.dot-yellow { background: var(--yellow); }
+.dot-ink { background: var(--ink); }
+.card-title { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; line-height: 1.1; letter-spacing: -.02em; margin-bottom: 12px; text-transform: uppercase; }
+.card-body { font-size: 13px; line-height: 1.8; color: #4a4a4a; margin-bottom: 20px; font-weight: 500; }
+.card-metric { display: inline-block; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 10px; border: var(--border2); background: var(--bg); margin-right: 6px; margin-bottom: 6px; }
+.card.red-accent .card-metric { border-color: var(--red); color: var(--red); background: rgba(208,32,32,.05); }
+.card.blue-accent .card-metric { border-color: var(--blue); color: var(--blue); background: rgba(16,64,192,.05); }
+.card.yellow-accent .card-metric { border-color: #a07a00; color: #7a5c00; background: rgba(240,192,32,.1); }
+.card-read-more { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; font-weight: 900; display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; color: var(--blue); border-bottom: 2px solid var(--blue); padding-bottom: 1px; }
+.card-read-more::after { content: '→'; transition: transform .15s; }
+.card:hover .card-read-more::after { transform: translateX(4px); }
+.card-right { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+.card-feature { font-size: 12px; line-height: 1.7; color: #4a4a4a; padding-left: 14px; border-left: 3px solid var(--ink); font-weight: 500; }
+.card-feature strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); margin-bottom: 3px; }
+.card::after { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 5px; opacity: 0; transition: opacity .2s; }
+.card.red-accent::after { background: var(--red); opacity: 1; }
+.card.blue-accent::after { background: var(--blue); opacity: 1; }
+.card.yellow-accent::after { background: var(--yellow); opacity: 1; }
+
+/* SKILLS */
+.skills-section { background: var(--blue); border-top: var(--border); border-bottom: var(--border); padding: 56px 48px; margin: 0 -48px; }
+.skills-section-head { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; }
+.skills-section-title { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.6); white-space: nowrap; }
+.skills-section-line { flex: 1; height: 2px; background: rgba(255,255,255,.2); }
+.skills-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-pill { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; padding: 8px 16px; border: 2px solid rgba(255,255,255,.5); color: rgba(255,255,255,.85); background: transparent; cursor: default; transition: background .15s, color .15s, border-color .15s; }
+.skill-pill:hover { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+
+/* CONTACT */
+.contact-row { display: flex; gap: 0; margin-bottom: 0; border: var(--border); }
+.contact-item { display: flex; align-items: center; gap: 20px; padding: 28px 32px; text-decoration: none; color: var(--ink); flex: 1; border-right: var(--border); background: var(--white); transition: background .15s, transform .15s; box-shadow: none; }
+.contact-item:last-child { border-right: none; }
+.contact-item:hover { background: var(--yellow); transform: translate(-2px,-2px); box-shadow: var(--shadow-sm); z-index: 1; position: relative; }
+.contact-icon { width: 48px; height: 48px; border: var(--border2); background: var(--ink); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 16px; flex-shrink: 0; transition: background .15s; }
+.contact-item:hover .contact-icon { background: var(--red); }
+.contact-label { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: rgba(18,18,18,.5); margin-bottom: 4px; font-weight: 700; }
+.contact-value { font-size: 13px; color: var(--ink); font-weight: 700; }
+
+/* FOOTER */
+footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-brand { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--white); display: flex; align-items: center; gap: 12px; }
+.footer-shapes { display: flex; gap: 5px; align-items: center; }
+.footer-shapes .fc { width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+.footer-shapes .fs { width: 10px; height: 10px; background: var(--yellow); }
+.footer-shapes .ft { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 10px solid var(--blue); }
+.footer-copy { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); font-weight: 500; }
+
+/* ANIMATIONS */
+@keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.anim-in { animation: fadeUp .6s ease both; }
+
+/* RESPONSIVE */
+@media(max-width:1024px) {
+  .hero-wrap { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .work-grid { grid-template-columns: repeat(2,1fr); }
+  .card.wide { grid-column: span 2; }
+  .stats { grid-template-columns: repeat(2,1fr); }
+}
+@media(max-width:640px) {
+  nav { padding: 0 20px; }
+  .hero-left { padding: 48px 20px; }
+  .work-grid { grid-template-columns: 1fr; }
+  .card.wide { grid-column: span 1; display: block; }
+  .card-right { margin-top: 20px; }
+  .stats { grid-template-columns: repeat(2,1fr); }
+  .skills-section { padding: 40px 20px; margin: 0 -20px; }
+  footer { padding: 24px 20px; }
+  .contact-row { flex-direction: column; }
+  .contact-item { border-right: none; border-bottom: var(--border); }
+  .filter-tabs { flex-wrap: wrap; width: 100%; }
+  .filter-btn { border-right: var(--border2); border-bottom: var(--border2); }
+}
+
+/* BLOG */
+.blog-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; color: rgba(18,18,18,.5); cursor: pointer; padding: 28px 0; transition: color .15s; border: none; background: none; }
+.blog-back:hover { color: var(--red); }
+.blog-back::before { content: '←'; font-size: 13px; }
+.blog-header { padding: 36px 0 40px; border-bottom: var(--border); margin-bottom: 48px; }
+.blog-eyebrow { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.blog-eyebrow::before { content: ''; display: block; width: 24px; height: 3px; background: var(--red); }
+.blog-title { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: clamp(28px, 4.5vw, 52px); line-height: 1.05; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 24px; }
+.blog-title em { font-style: italic; color: var(--blue); text-transform: none; }
+.blog-meta { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(18,18,18,.5); display: flex; gap: 20px; flex-wrap: wrap; font-weight: 700; }
+.blog-screenshot-wrap { margin: 0 0 12px; display: flex; justify-content: center; }
+.blog-screenshot-wrap img { display: block; width: 100%; max-width: 560px; height: auto; border: var(--border); box-shadow: var(--shadow-md); }
+.blog-img-caption { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(18,18,18,.4); text-align: center; margin-bottom: 52px; font-weight: 700; }
+.blog-body { max-width: 680px; }
+.blog-body p { font-size: 14px; line-height: 1.9; color: #3a3733; margin-bottom: 24px; font-weight: 500; }
+.blog-body h2 { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -.02em; text-transform: uppercase; margin: 48px 0 16px; line-height: 1.1; border-left: 5px solid var(--red); padding-left: 16px; }
+.callout { background: var(--white); border: var(--border2); border-left: 5px solid var(--blue); padding: 20px 24px; margin: 32px 0; font-size: 13px; line-height: 1.8; color: #3a3733; font-weight: 500; }
+.callout strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+.callout code { font-family: 'Courier New', monospace; font-size: 12px; background: rgba(16,64,192,.08); padding: 1px 5px; }
+.learning-list { margin: 0 0 24px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.learning-list li { font-size: 13px; line-height: 1.75; color: #3a3733; padding: 16px 20px; background: var(--white); border: var(--border2); display: flex; gap: 16px; align-items: flex-start; font-weight: 500; }
+.learning-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 12px; color: var(--white); background: var(--red); flex-shrink: 0; padding: 2px 7px; padding-top: 1px; }
+.learning-text strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
+.tech-tag { display: inline-block; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; padding: 4px 10px; border: var(--border2); background: var(--bg); margin: 3px 3px 3px 0; }
+.blog-tags { margin: 36px 0 60px; display: flex; flex-wrap: wrap; gap: 4px; }
+.try-it { background: var(--blue); border: var(--border2); box-shadow: var(--shadow-sm); padding: 22px 26px; margin: 32px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.try-it-text { font-size: 12px; line-height: 1.7; color: rgba(255,255,255,.9); max-width: 480px; font-weight: 500; }
+.try-it-text strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 13px; color: white; margin-bottom: 4px; letter-spacing: -.01em; }
+.try-it-btn { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; padding: 10px 20px; border: 2px solid var(--yellow); background: var(--yellow); color: var(--ink); text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: transform .15s, box-shadow .15s; display: inline-block; }
+.try-it-btn:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-sm); }
+.blog-bottom-nav { border-top: var(--border); padding: 32px 0 48px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(18,18,18,.4); font-weight: 700; }
+.blog-bottom-nav .back-link { color: var(--blue); cursor: pointer; transition: color .15s; display: flex; align-items: center; gap: 6px; font-weight: 900; }
+.blog-bottom-nav .back-link:hover { color: var(--red); }
+.blog-bottom-nav .back-link::before { content: '←'; }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <nav>
+    <div class="nav-brand" onclick="goHome()">
+      <div class="nav-shapes">
+        <div class="nav-shape-circle"></div>
+        <div class="nav-shape-square"></div>
+        <div class="nav-shape-tri"></div>
+      </div>
+      <div>
+        <div class="nav-name">Saumya Vatsa</div>
+        <div class="nav-tagline">product × strategy × ai-first</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link" onclick="scrollToSection('section-projects')">Projects</button>
+      <button class="nav-link" onclick="scrollToSection('section-contact')">Contact</button>
+    </div>
+  </nav>
+</div>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+
+<div class="hero-wrap">
+  <div class="hero-left">
+    <div class="hero-geo-bg">
+      <div class="geo-dot-grid"></div>
+      <div class="geo-circle-lg"></div>
+      <div class="geo-rect"></div>
+    </div>
+    <div class="hero-eyebrow anim-in" style="animation-delay:.1s">
+      <div class="hero-eyebrow-bar"></div>
+      <span class="hero-eyebrow-text">Saumya Vatsa</span>
+    </div>
+    <h1 class="hero-headline anim-in" style="animation-delay:.2s">
+      I turn<br>
+      <span class="line-accent">messy</span><br>
+      problems<br>
+      <em class="line-italic">that ship.</em>
+    </h1>
+    <p class="hero-body anim-in" style="animation-delay:.32s">
+      MBA (Marketing, Systems) + CS background. I live in the overlap between product strategy, AI tooling, and "wait, why does this UX hurt so much?" — then fix it. From $12M client pitches to AI-generated murder mystery games, I build end-to-end and care about both the deck <em>and</em> the outcome.
+    </p>
+    <div class="hero-cta-row anim-in" style="animation-delay:.42s">
+      <button class="btn btn-red" onclick="scrollToSection('section-projects')">View Projects →</button>
+      <button class="btn btn-outline" onclick="scrollToSection('section-contact')">Get in Touch</button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-geo">
+      <div class="hrgeo-circle"></div>
+      <div class="hrgeo-sq"></div>
+      <div class="hrgeo-tri"></div>
+    </div>
+    <div class="photo-cards anim-in" style="animation-delay:.5s">
+      <div class="photo-card">
+        <div class="photo-card-inner">
+          <span class="photo-num">01</span>
+          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
+          <div class="photo-label">Product</div>
+          <div class="photo-hint">→ add photo</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-inner">
+          <span class="photo-num">02</span>
+          <span class="photo-star">✦</span>
+          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
+          <div class="photo-label">Strategy</div>
+          <div class="photo-hint">→ add photo</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-inner">
+          <span class="photo-num">03</span>
+          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
+          <div class="photo-label">AI-first</div>
+          <div class="photo-hint">→ add photo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">$12M</div><div class="stat-label">Revenue secured via AI product concepts</div></div>
+  <div class="stat"><div class="stat-num">73%</div><div class="stat-label">Faster turnaround on financial ops</div></div>
+  <div class="stat"><div class="stat-num">90%</div><div class="stat-label">Manual content work automated away</div></div>
+  <div class="stat"><div class="stat-num">2</div><div class="stat-label">AI-first apps shipped from scratch</div></div>
+</div>
+
+<div class="content-area" style="padding: 0 48px; max-width:1400px; margin:0 auto;">
+
+  <div id="section-projects" class="section-head">
+    <div class="section-title">What I've Built</div>
+    <div class="section-line"></div>
+    <div class="section-num">01</div>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="work">Work Experience</button>
+    <button class="filter-btn" data-filter="apps">Vibe Coded Apps</button>
+    <button class="filter-btn" data-filter="automation">Automation</button>
+  </div>
+
+  <div class="work-grid" id="work-grid">
+    <div class="card wide blue-accent" data-cat="apps" onclick="showBlog('bubble')">
+      <div class="card-corner"></div>
+      <div>
+        <div class="card-tag"><span class="dot dot-blue"></span>Side Project · Shipped</div>
+        <div class="card-title">Bubble Bloom</div>
+        <div class="card-body">A browser mindfulness app where you pop 36 iridescent bubbles to reveal a hidden painting. ASMR sound design, zero dependencies, one 95KB file. Built for 2–3 minute desk breaks.</div>
+        <span class="card-metric">Vibe Coded</span><span class="card-metric">Web Audio API</span><span class="card-metric">Canvas 2D</span>
+        <div class="card-read-more">Read the build story</div>
+      </div>
+      <div class="card-right">
+        <div class="card-feature"><strong>Zero dependencies</strong>Every pixel drawn programmatically — no assets, no npm. Ships as a single file.</div>
+        <div class="card-feature"><strong>4-layer sound design</strong>Live synthesised via Web Audio API. Volume rises as you pop more bubbles.</div>
+        <div class="card-feature"><strong>16 procedural artworks</strong>Starry Night, The Great Wave — generated at runtime from math and bezier curves.</div>
+        <div class="card-feature"><strong>Designed for the overlooked</strong>No timer, no score, no failure state. Built for neurodivergent users and anyone who needs 3 minutes back.</div>
+      </div>
+    </div>
+
+    <div class="card red-accent" data-cat="apps" onclick="showBlog('murder')">
+      <div class="card-corner"></div>
+      <div class="card-tag"><span class="dot dot-red"></span>Side Project · Shipped</div>
+      <div class="card-title">Whodunit</div>
+      <div class="card-body">A fully AI-generated murder mystery game where tone, setting, and difficulty unlock a unique case every time. Eight screens, procedural suspects, a locked killer reveal.</div>
+      <span class="card-metric">AI-generated</span><span class="card-metric">Noir UI</span>
+      <div class="card-read-more">Read the build story</div>
+    </div>
+
+    <div class="card yellow-accent" data-cat="automation">
+      <div class="card-corner"></div>
+      <div class="card-tag"><span class="dot dot-yellow"></span>Personal Project · Shipped</div>
+      <div class="card-title">LLM Content Automation</div>
+      <div class="card-body">Architected end-to-end pipelines that replaced hours of manual content work with a single trigger. LLM-driven extraction, transformation, and publishing — 90% of the grunt work, gone.</div>
+      <span class="card-metric">90% automated</span><span class="card-metric">LLM pipelines</span>
+    </div>
+
+    <div class="card" data-cat="work" style="border-left:5px solid var(--ink);">
+      <div class="card-corner"></div>
+      <div class="card-tag"><span class="dot dot-ink"></span>Cognizant · Product Strategy</div>
+      <div class="card-title">$12M AI Product Pitch</div>
+      <div class="card-body">Translated abstract client pain points into structured AI product concepts with clear ROI narratives. Fluent in both boardroom and backend.</div>
+      <span class="card-metric">$12M secured</span><span class="card-metric">AI product design</span>
+    </div>
+
+    <div class="card red-accent" data-cat="work">
+      <div class="card-corner"></div>
+      <div class="card-tag"><span class="dot dot-red"></span>Diwas by Manyavar · GTM</div>
+      <div class="card-title">0→1 GTM Strategy</div>
+      <div class="card-body">Mapped fragmented user journeys across online marketplaces and Tier 2/3 physical stores. Defined positioning, pricing, and channel mix for a brand launch from scratch.</div>
+      <span class="card-metric">Pricing strategy</span><span class="card-metric">Channel mapping</span>
+    </div>
+
+    <div class="card blue-accent" data-cat="work">
+      <div class="card-corner"></div>
+      <div class="card-tag"><span class="dot dot-blue"></span>Accenture · Process Engineering</div>
+      <div class="card-title">73% Faster Financial Ops</div>
+      <div class="card-body">Overhauled backend financial processes that had accumulated years of manual overhead. Rebuilt the workflow, cut the fat, measured the result: 73% faster turnaround time.</div>
+      <span class="card-metric">73% faster</span><span class="card-metric">Process redesign</span>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <div class="section-title">How I Work</div>
+    <div class="section-line"></div>
+    <div class="section-num">02</div>
+  </div>
+  <div class="skills-section">
+    <div class="skills-section-head">
+      <div class="skills-section-title">Toolkit &amp; Strengths</div>
+      <div class="skills-section-line"></div>
+    </div>
+    <div class="skills-row">
+      <div class="skill-pill">Product Strategy</div><div class="skill-pill">Product Lifecycle Management</div><div class="skill-pill">Product Roadmap</div><div class="skill-pill">Prototyping</div><div class="skill-pill">User Research</div><div class="skill-pill">Market Research</div><div class="skill-pill">Competitive Intelligence</div><div class="skill-pill">GTM</div><div class="skill-pill">LLM Orchestration</div><div class="skill-pill">Dashboards</div><div class="skill-pill">Excel</div><div class="skill-pill">PowerPoint</div><div class="skill-pill">Claude</div><div class="skill-pill">Gemini</div><div class="skill-pill">Figma</div>
+    </div>
+  </div>
+
+  <div id="section-contact" class="section-head" style="padding-top:56px;">
+    <div class="section-title">Get in Touch</div>
+    <div class="section-line"></div>
+    <div class="section-num">03</div>
+  </div>
+  <div class="contact-row" style="margin-bottom:64px;">
+    <a href="mailto:saumya.vatsa@email.com" class="contact-item">
+      <div class="contact-icon">✉</div>
+      <div class="contact-detail">
+        <div class="contact-label">Email</div>
+        <div class="contact-value">saumya.vatsa@email.com</div>
+      </div>
+    </a>
+    <a href="https://www.linkedin.com/in/saumya-vatsa-ximb/" target="_blank" class="contact-item">
+      <div class="contact-icon">in</div>
+      <div class="contact-detail">
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">saumya-vatsa-ximb</div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-shapes"><div class="fc"></div><div class="fs"></div><div class="ft"></div></div>
+    Saumya Vatsa
+  </div>
+  <div class="footer-copy">Product × Strategy × AI-first · 2026</div>
+</footer>
+
+</div><!-- /page-home -->
+
+
+<!-- BLOG: BUBBLE BLOOM -->
+<div id="page-blog-bubble" class="page">
+<div class="container">
+  <div class="blog-back" onclick="goHome()">Back to portfolio</div>
+  <header class="blog-header">
+    <div class="blog-eyebrow">Product Case Study · Side Project</div>
+    <h1 class="blog-title">From PRD to shipped product: how I defined, scoped, and built a browser-based stress relief app using AI tools.</h1>
+    <div class="blog-meta"><span>March 2026</span><span>8 min read</span><span>Product Management · User Research · Vibe Coding</span></div>
+  </header>
+
+  <div class="blog-body">
+
+    <div class="try-it">
+      <div class="try-it-text">
+        <strong>🫧 Try the live product — bubblewrapuzzle.vercel.app</strong>
+        Pop 30–60 bubbles, reveal a hidden illustration, feel briefly human again. No account. No install. No timer. This is what zero-friction looks like in practice.
+      </div>
+      <a href="https://bubblewrapuzzle.vercel.app" target="_blank" class="try-it-btn">Open the app →</a>
+    </div>
+
+    <p>Bubble Bloom is a browser-based micro-relaxation game. Users pop iridescent bubbles to progressively reveal a calming illustrated puzzle, with ASMR audio feedback on every pop and an ambient soundscape that builds as the image emerges. Sessions run 2–3 minutes. There is no timer, no score, and no failure state.</p>
+
+    <p>The product was built entirely with AI vibe-coding tools — Claude, Gemini, and Replit. But the story worth telling isn't about the tech stack. It's about what happened before a single line of code was written.</p>
+
+    <h2>The Problem: who actually needs this?</h2>
+
+    <p>Most stress-relief apps are designed for people who have already committed to wellness. They require accounts, onboarding flows, subscriptions, and 10-minute sessions. That excludes the people who need relief most urgently: the person between back-to-back meetings who has 3 minutes, not 30.</p>
+
+    <p>I defined seven distinct user segments in the PRD, each with a different relationship to stress and a different constraint on time or context:</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>Busy employees</strong> — need a 2-minute mental reset between meetings. The product must be openable, completable, and closeable within a calendar gap. No loading screens. No decisions.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Neurodivergent users</strong> (ADHD, autism, sensory processing differences) — benefit from repetitive, low-stakes sensory input. The interaction pattern — tap to pop, one action, one reward — was designed specifically for this group, not as an afterthought.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>Students</strong> — short decompression during study sessions or exam periods. Completion in under 3 minutes was a hard product constraint, not a nice-to-have.</span></li>
+      <li><span class="learning-num">04</span><span class="learning-text"><strong>Caregivers</strong> (parents, nurses, social workers) — micro-recovery moments in high-demand schedules. Often on mobile, often interrupted. The product had to be resumable at any point without losing progress.</span></li>
+      <li><span class="learning-num">05</span><span class="learning-text"><strong>People with anxiety</strong> — grounding through predictable, satisfying interaction. Predictability was a design principle: every pop behaves identically, every sound follows the same pattern.</span></li>
+      <li><span class="learning-num">06</span><span class="learning-text"><strong>Insomniacs</strong> — a calming screen activity that isn't doom-scrolling. No algorithmic feed. No infinite scroll. A finite, completable loop with a clear endpoint.</span></li>
+      <li><span class="learning-num">07</span><span class="learning-text"><strong>Chronic pain sufferers</strong> — passive sensory engagement with no dexterity demands. Single tap or click only: no drag, no swipe, no precision required.</span></li>
+    </ul>
+
+    <p>Understanding these users before writing any spec shaped every subsequent decision — from the 30–60 bubble grid size (enough to feel satisfying, not so many it becomes a chore) to the decision to make audio purely optional with a persistent mute toggle.</p>
+
+    <h2>Success metrics, defined before building</h2>
+
+    <p>One of the disciplines I find most revealing about a PM's approach is how they define success before the product exists. Outcome metrics, not output metrics. I set four in the PRD:</p>
+
+    <div class="callout">
+      <strong>Target success metrics (v1.0)</strong>
+      Session completion rate &gt; 70% — users finish revealing the full puzzle. Average session duration: 2–4 minutes. Return visit rate: more than 1 puzzle opened per week. Subjective calm score (optional exit poll): ≥ 4/5. These weren't aspirational — they were the criteria against which I'd evaluate whether the core experience was actually working.
+    </div>
+
+    <p>The completion metric deserves particular attention. A stress-relief app that users abandon halfway through isn't delivering its primary value. The entire interaction arc — grid size, audio crescendo, the final bloom animation, the completion chime — was designed to make finishing feel rewarding, not just starting.</p>
+
+    <h2>Feature decisions: what made the cut and why</h2>
+
+    <p>The PRD defined four core feature areas. Each involved explicit trade-offs worth naming.</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>Bubble grid: 30–60 bubbles, organic layout</strong> — Not a fixed 6×6 grid. Organic, non-uniform placement with varied bubble sizes makes each session feel handmade rather than mechanical. The iridescent shimmer and slow drift animation in idle state give the product life before the user even touches it. This was a deliberate first-impression decision.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>ASMR audio: pitch-varied per pop, ambient crescendo</strong> — Each pop triggers a soft sound varied ±15% in pitch for an organic feel. The ambient background track fades from 0% to 100% volume as more bubbles are revealed. This isn't decoration — it's the primary mechanism for communicating progress without a percentage bar or number. The user feels the session advancing through sound.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>Breathe Mode: OFF by default</strong> — Every 10 pops, an optional breathing prompt overlays for 4 seconds. I made this opt-in deliberately. Surfacing an unrequested mindfulness prompt mid-session is an interruption, not a feature. Users who want it can enable it; users who just want to pop bubbles aren't punished for that preference.</span></li>
+      <li><span class="learning-num">04</span><span class="learning-text"><strong>Progress indicator: ring only, no numbers</strong> — A subtle circular ring with no percentage text, no numerical count. Numbers create pressure. A ring communicates direction without quantifying the distance. This was the same logic behind removing the timer: the moment you can fail to meet a target, the product stops being calming.</span></li>
+    </ul>
+
+    <h2>Five worlds, each a complete sensory system</h2>
+
+    <p>The five illustration themes — Ocean Depth, Night Sky, Forest Terrarium, Sakura Garden, Candy Cloud — weren't just visual variety. Each is a matched set: a colour palette, an ambient soundscape, and an illustration style that reinforce each other. A user in Ocean Depth hears underwater hum and bubbles while revealing bioluminescent jellyfish in aqua and teal. The audio and visual work as a single experience, not parallel tracks.</p>
+
+    <p>This is a common failure mode in product design: features that exist as checklists rather than as coherent systems. Getting the worlds right meant defining them as experiences first, then speccing the assets.</p>
+
+    <h2>Design principles as scope enforcement</h2>
+
+    <p>Four principles governed every feature decision, and more importantly, every feature rejection:</p>
+
+    <div class="callout">
+      <strong>What "No Pressure, Ever" actually meant in practice</strong>
+      No timer. No score. No lives. No failure state. No streaks. No leaderboards. No sharing prompts. No push notifications. No ads. Each of these was a deliberate out-of-scope decision in the PRD — not a roadmap item deferred to v2, but a conscious choice that the product's value proposition depended on their absence. Intentional restraint is harder to maintain than it sounds when building, because every tool and every collaborator (including AI) defaults toward adding features, not removing them.
+    </div>
+
+    <h2>What the PRD actually bought me</h2>
+
+    <p>I wrote the full PRD before prompting a single AI tool. That ordering mattered. Here's what it changed in practice:</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>Requirements became prompts</strong> — "Art regions must not be visible before the corresponding bubble is popped" is a product requirement. It is also an exact prompt constraint. Writing the PRD forced me to articulate requirements precisely enough to be executable — which is exactly the same skill as writing a tight spec for an engineering team.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Scope had a written defence</strong> — When building with AI tools, the temptation to add features is constant. Every time a new idea surfaced, I checked it against the PRD's Out of Scope section. User accounts: out of scope. Social sharing: out of scope. Gamification pressure: actively contra-indicated by the design principles. The document wasn't just planning — it was scope enforcement.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>Technical constraints became product decisions earlier</strong> — The performance targets (initial load under 3 seconds on 4G, 60fps on mid-range devices, total bundle under 2MB) weren't added after building. They were written into the PRD, which meant they shaped architectural choices from the start rather than creating rework at the end.</span></li>
+      <li><span class="learning-num">04</span><span class="learning-text"><strong>Accessibility was non-negotiable, not an afterthought</strong> — WCAG 2.1 AA, full keyboard navigation, screen reader support, and prefers-reduced-motion compliance were all in the PRD. Speccing accessibility before building means it gets designed in, not bolted on. No flashing animations. No sudden loud sounds. No red or high-frequency alert colours. These were sensory safety requirements, not accessibility checkboxes.</span></li>
+    </ul>
+
+    <h2>The phased roadmap</h2>
+
+    <p>The PRD closed with a four-phase roadmap — not a backlog, but a sequenced plan with a clear MVP definition. Phase 1 (2 weeks): core bubble grid, one theme (Ocean), ASMR pop sounds, puzzle reveal. Phase 2 (1 week): all five themes, ambient soundscapes, Breathe Mode. Phase 3 (1 week): performance optimisation, accessibility audit, mobile polish. Phase 4: user testing with target audiences, iterate on feedback — ongoing.</p>
+
+    <p>Shipping Phase 1 first meant validating the core loop — pop, sound, reveal — before investing in the content library. It's the same logic as any MVP: learn the minimum necessary before scaling the expensive parts.</p>
+
+    <div class="blog-tags">
+      <span class="tech-tag">Product Management</span><span class="tech-tag">PRD</span><span class="tech-tag">User Research</span><span class="tech-tag">Accessibility</span><span class="tech-tag">Sensory Design</span><span class="tech-tag">Vibe Coding</span><span class="tech-tag">Claude</span><span class="tech-tag">Gemini</span><span class="tech-tag">Zero-friction UX</span><span class="tech-tag">Roadmapping</span>
+    </div>
+  </div>
+
+  <div class="blog-bottom-nav">
+    <span class="back-link" onclick="goHome()">Back to portfolio</span>
+    <span>Bubble Bloom · March 2026</span>
+  </div>
+</div>
+</div>
+
+
+<!-- BLOG: WHODUNIT -->
+<div id="page-blog-murder" class="page">
+<div class="container">
+  <div class="blog-back" onclick="goHome()">Back to portfolio</div>
+  <header class="blog-header">
+    <div class="blog-eyebrow">Product Case Study · Side Project</div>
+    <h1 class="blog-title">Building Whodunit: what a murder mystery game taught me about AI product design, narrative coherence, and the PRD as a spec tool.</h1>
+    <div class="blog-meta"><span>March 2026</span><span>10 min read</span><span>Product Management · AI Systems · Game Design · Lovable</span></div>
+  </header>
+
+  <div class="blog-body">
+
+    <div class="try-it">
+      <div class="try-it-text">
+        <strong>🔪 Try it — whodunit.lovable.app</strong>
+        Pick a tone, setting, difficulty, and detective avatar. An AI generates your entire case — unique suspects, alibis, evidence, red herrings, and a pre-committed killer. No two mysteries are the same.
+      </div>
+      <a href="https://whodunit.lovable.app" target="_blank" class="try-it-btn">Play Whodunit →</a>
+    </div>
+
+    <p>Most games lie to you about replayability. They shuffle the same deck. Whodunit does something different: it generates the entire mystery from scratch every session — different victim, different killer, different motive, different evidence trail — driven entirely by the tone, setting, and difficulty you configure at the start. The AI is not filling in a template. It is writing a new case.</p>
+
+    <p>What I want to document here isn't the build. It's the product thinking behind it — the decisions that shaped what Whodunit is, what it isn't, and why those boundaries matter.</p>
+
+    <h2>The problem I was actually solving</h2>
+
+    <p>Existing murder mystery formats fail in two specific ways. Physical kits and boxed games are single-use: once played, the answer is known and the product is dead. Digital mystery games use templates. Players learn the structural tells — the character archetype who is always innocent, the clue type that always flags the killer. Templates create pattern recognition, not deduction.</p>
+
+    <p>Neither format does what modern LLMs make possible: generating a coherent, contextually rich, internally consistent mystery at scale, unique per session, customised to user inputs. The gap was obvious. The product question was harder: how do you make AI-generated narrative feel like a game, not a chatbot?</p>
+
+    <div class="callout">
+      <strong>The design brief in one sentence</strong>
+      Dark mahogany aesthetics, blood-red as the only accent colour (#BC0000), 3D avatar illustrations for suspects and detectives, eight investigation screens with a vault-door reveal gate — and a mystery where the killer was always the same person from the moment the case was generated.
+    </div>
+
+    <h2>The one constraint that defined everything</h2>
+
+    <p>The most important product decision in Whodunit was not a feature. It was a constraint: the killer's identity is committed at generation time, not at reveal time.</p>
+
+    <p>This sounds obvious, but it has significant technical implications. The AI cannot retroactively assign a killer based on which suspects the player investigated most. The LLM must generate victim, suspects, evidence trail, red herrings, and alibi inconsistencies all pointing at a pre-determined person, in a single coherent generation call. The killer was always the same person. The evidence always pointed there. You were just finding it.</p>
+
+    <p>Without this constraint, you don't have a mystery game. You have a lottery with narrative decoration. Writing it as a hard requirement in the PRD before a line of code was written meant it shaped the entire AI prompt architecture, the JSON output schema, and the validation logic that gates the game from rendering until coherence is confirmed.</p>
+
+    <h2>Four configuration axes, infinite outputs</h2>
+
+    <p>The setup screen asks four things: tone, setting, difficulty, and detective avatar. These aren't cosmetic filters on a shared template. Each combination feeds directly into the generation prompt as structural parameters, producing a genuinely different output.</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>Tone shapes the narrative register</strong> — A Noir mystery generates a cynical narrator voice, corrupt institutional alibis, and morally compromised suspects. A Cozy mystery generates eccentric but sympathetic characters with motives rooted in reputation rather than violence. The same setting, the same difficulty — completely different stories.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Setting shapes spatial logic</strong> — A suspect cannot claim to have been "in the library" on a cruise ship. A Victorian Mansion has different room vocabulary, staff hierarchies, and alibi plausibility than a Museum. Setting isn't a backdrop — it constrains what the AI can plausibly generate.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>Difficulty shapes evidence architecture</strong> — Easy gives you 4 suspects, 6 clues, 2 red herrings, and a killer with a weak alibi. Hard gives you 8 suspects, 12 clues, 6 red herrings, and a killer whose alibi initially appears strongest. This isn't a number adjustment — it's a structural change in how the AI must distribute incriminating evidence.</span></li>
+      <li><span class="learning-num">04</span><span class="learning-text"><strong>Avatar is identity, not mechanics — yet</strong> — In v1.0, the detective avatar sets the player's frame without changing game mechanics. It's a product decision about investment and ownership: the player chose who they are before they read the first clue. v2.0 will introduce avatar-conditional dialogue paths that surface different information per detective type.</span></li>
+    </ul>
+
+    <h2>Eight screens, each with one job</h2>
+
+    <p>Whodunit is an eight-screen investigation arc. What took the most spec work wasn't the screens that do the most — it was defining what each screen and only that screen is responsible for.</p>
+
+    <p>The briefing screen establishes the scene before introducing suspects. That ordering is deliberate: reading the crime before meeting the cast means the player approaches suspects with context rather than meeting them cold. The evidence board uses tiered unlocking — Tier 1 clues are available immediately, Tier 2 and 3 unlock as earlier evidence is examined. Players cannot skip to the most incriminating evidence. Investigation has structure.</p>
+
+    <div class="callout">
+      <strong>The reveal gate: 70%, not 100%</strong>
+      The killer reveal unlocks when 70% of clues have been examined. Not 100% — that would be punishing, since some clues are genuine dead ends that a good player might deliberately skip. Not 50% — that allows too easy a bypass. 70% requires systematic investigation without demanding completionist behaviour. I set this threshold in the PRD before building the progress ring, which meant the UI was designed around the number rather than the number being adjusted to fit the UI.
+    </div>
+
+    <h2>Three product problems disguised as UX bugs</h2>
+
+    <p>Building with AI tools surfaces product problems faster than traditional development because the tool will faithfully implement whatever you specified — including things you specified poorly. Three moments in the build were instructive.</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>Suspect profiles closing on second open</strong> — Early builds closed Profile A when Profile B was opened. This felt like a UX bug. It was actually an information architecture decision I hadn't made explicitly: should investigation allow cross-referencing, or require sequential examination? Cross-referencing alibis on-screen is deduction. Holding them in memory is recall. Those are different games. Once I made the decision explicitly — multiple profiles open simultaneously, independent close state — the implementation was trivial. The bug was a missing spec.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Empty space on clue choice screens</strong> — Clue modals had three investigative action choices and a significant amount of empty space below them. This is what I started calling a product smell: empty space in a murder mystery game communicates "unfinished." The fix wasn't purely aesthetic — I added atmospherically blended cobweb corner illustrations, a faint bloody footprint trail, and a knife silhouette. The constraint was "atmospheric, not cluttered." That required defining what each decorative element was doing before placing it.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>The loading screen was breaking the experience</strong> — AI generation takes 8–15 seconds. Early builds showed a spinner and the word "Generating." This broke the atmospheric frame at the highest-intent moment in the session — right after the player committed to their configuration. The fix was the factoid system: real detective and criminology trivia floating across the screen during generation. The player's first piece of mystery knowledge arrives before the briefing does. Wait time becomes game time. This was a product decision about what the loading state communicates, not a visual polish decision.</span></li>
+    </ul>
+
+    <h2>What writing the PRD before building actually changed</h2>
+
+    <p>I wrote a complete PRD before opening Lovable. I've written about why I do this with Bubble Bloom — but Whodunit pushed it further, because the domain (AI-generated game narrative) has higher stakes for specification failures. Vague intentions in a relaxation app produce mediocre outputs. Vague intentions in a mystery game produce an AI that contradicts itself halfway through a case.</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>The PRD is the prompt</strong> — Every screen described in precise detail in the PRD became a reliable generation prompt with minimal revision. Every screen described vaguely cost three to five revision cycles. "A screen where users examine clues" generates a generic interface. "A grid of evidence cards with atmospheric icons, tiered unlock based on examination progress, and a modal containing full clue text plus three investigative choices that produce AI-generated unique outcomes" generates what I actually wanted.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>The decision log prevented scope creep in real time</strong> — The PRD included an appendix of key decisions with rationale. When the temptation arose to add a leaderboard, a sharing prompt, or a session save, I checked the decision log. "No accounts in v1.0 — return play rate will determine whether session persistence justifies Phase 2 investment." The document wasn't planning. It was scope enforcement at the moment of temptation.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>Tool-switching required a shared spec</strong> — I used Lovable for primary development and Replit for specific component work. Two tools with different structural opinions about the same codebase is a project management problem, not a technical one. The PRD was the shared source of truth across both. When I switched tools, I didn't lose the thread because the thread was written down.</span></li>
+      <li><span class="learning-num">04</span><span class="learning-text"><strong>Success metrics shaped features backwards</strong> — I wrote the success metrics before I wrote the feature list. "AI coherence rating ≥ 4.0/5.0 on exit survey" meant the AI generation system needed an explicit coherence specification, a JSON schema with validation, and retry logic — all before I thought about what the evidence board should look like. Outcome metrics make feature priority obvious in a way that working forward from features never does.</span></li>
+    </ul>
+
+    <h2>What I'd specify differently</h2>
+
+    <p>The one thing the PRD underspecified was the investigative choice outcome system. I wrote "each choice produces a unique AI-generated outcome" without defining what "unique" meant in practice — did it mean different text, different information revealed, or different investigation paths? In the build, this produced choice outcomes that varied in text but not always in investigative value. v2.0 will spec three choice outcome types explicitly: one that reveals new information, one that confirms existing evidence, and one that is a deliberate dead end. Players should need to evaluate choices, not just click through them.</p>
+
+    <div class="blog-tags">
+      <span class="tech-tag">Product Management</span><span class="tech-tag">PRD</span><span class="tech-tag">AI Systems Design</span><span class="tech-tag">Game Design</span><span class="tech-tag">Narrative Coherence</span><span class="tech-tag">Lovable</span><span class="tech-tag">Replit</span><span class="tech-tag">Vibe Coding</span><span class="tech-tag">Spec-first Development</span><span class="tech-tag">UX Architecture</span>
+    </div>
+  </div>
+
+  <div class="blog-bottom-nav">
+    <span class="back-link" onclick="goHome()">Back to portfolio</span>
+    <span>Whodunit · March 2026</span>
+  </div>
+</div>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById(id);
+  if (pg) { pg.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+function goHome() { showPage('page-home'); }
+function showBlog(slug) { showPage('page-blog-' + slug); }
+
+// FIX: double requestAnimationFrame ensures the browser finishes painting
+// page-home (display:block) before scrollIntoView fires — replaces the
+// unreliable 80ms setTimeout that caused the scroll to silently fail.
+function scrollToSection(id) {
+  showPage('page-home');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+  document.querySelectorAll('.card, .filter-btn, .nav-brand, .photo-card, .blog-back, .back-link, .skill-pill, .try-it-btn, .contact-item, .btn').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+  });
+
+  // Filter tabs
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.getElementById('work-grid').querySelectorAll('.card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>
