@@ -64,7 +64,7 @@ nav { padding: 0 48px; display: flex; align-items: stretch; justify-content: spa
 .hero-geo-bg .geo-dot-grid { position: absolute; inset: 0; background-image: radial-gradient(#12121212 1.5px, transparent 1.5px); background-size: 28px 28px; }
 .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
 .hero-eyebrow-bar { width: 40px; height: 4px; background: var(--red); flex-shrink: 0; }
-.hero-eyebrow-text { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--red); }
+.hero-eyebrow-text { font-size: 16px; letter-spacing: .12em; text-transform: uppercase; font-weight: 900; color: var(--red); }
 .hero-headline { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: clamp(44px, 5vw, 80px); line-height: .95; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 32px; position: relative; z-index: 1; }
 .hero-headline .line-accent { color: var(--red); }
 .hero-headline .line-italic { font-style: italic; font-weight: 900; color: var(--green); display: block; }
@@ -387,21 +387,13 @@ function scrollToSection(id) {
   </div>
 
   <div class="work-grid" id="work-grid">
-    <div class="card wide blue-accent" data-cat="apps" onclick="showBlog('bubble')">
+    <div class="card blue-accent" data-cat="apps" onclick="showBlog('bubble')">
       <div class="card-corner"></div>
-      <div>
-        <div class="card-tag"><span class="dot dot-blue"></span>Side Project · Shipped</div>
-        <div class="card-title">Bubble Bloom</div>
-        <div class="card-body">A browser mindfulness app where you pop 36 iridescent bubbles to reveal a hidden painting. ASMR sound design, zero dependencies, one 95KB file. Built for 2–3 minute desk breaks.</div>
-        <span class="card-metric">Vibe Coded</span><span class="card-metric">Web Audio API</span><span class="card-metric">Canvas 2D</span>
-        <div class="card-read-more">Read the build story</div>
-      </div>
-      <div class="card-right">
-        <div class="card-feature"><strong>Zero dependencies</strong>Every pixel drawn programmatically — no assets, no npm. Ships as a single file.</div>
-        <div class="card-feature"><strong>4-layer sound design</strong>Live synthesised via Web Audio API. Volume rises as you pop more bubbles.</div>
-        <div class="card-feature"><strong>16 procedural artworks</strong>Starry Night, The Great Wave — generated at runtime from math and bezier curves.</div>
-        <div class="card-feature"><strong>Designed for the overlooked</strong>No timer, no score, no failure state. Built for neurodivergent users and anyone who needs 3 minutes back.</div>
-      </div>
+      <div class="card-tag"><span class="dot dot-blue"></span>Side Project · Shipped</div>
+      <div class="card-title">Bubble Bloom</div>
+      <div class="card-body">A browser mindfulness app where you pop 36 iridescent bubbles to reveal a hidden painting. ASMR sound design, zero dependencies, one 95KB file. Built for 2–3 minute desk breaks.</div>
+      <span class="card-metric">Vibe Coded</span><span class="card-metric">Web Audio API</span><span class="card-metric">Canvas 2D</span>
+      <div class="card-read-more">Read the build story</div>
     </div>
 
     <div class="card red-accent" data-cat="apps" onclick="showBlog('murder')">
@@ -416,24 +408,24 @@ function scrollToSection(id) {
     <div class="card yellow-accent" data-cat="automation">
       <div class="card-corner"></div>
       <div class="card-tag"><span class="dot dot-yellow"></span>Personal Project · Shipped</div>
-      <div class="card-title">LLM Content Automation</div>
-      <div class="card-body">Architected end-to-end pipelines that replaced hours of manual content work with a single trigger. LLM-driven extraction, transformation, and publishing — 90% of the grunt work, gone.</div>
+      <div class="card-title">Daily AI News Digest</div>
+      <div class="card-body">Automated 90% of manual tracking — filters, summarises, and formats AI-specific news daily, cutting signal-to-noise ratio across sources.</div>
       <span class="card-metric">90% automated</span><span class="card-metric">LLM pipelines</span>
     </div>
 
     <div class="card" data-cat="work" style="border-left:5px solid var(--ink);">
       <div class="card-corner"></div>
       <div class="card-tag"><span class="dot dot-ink"></span>Cognizant · Product Strategy</div>
-      <div class="card-title">$12M AI Product Pitch</div>
-      <div class="card-body">Translated abstract client pain points into structured AI product concepts with clear ROI narratives. Fluent in both boardroom and backend.</div>
-      <span class="card-metric">$12M secured</span><span class="card-metric">AI product design</span>
+      <div class="card-title">AI-Native Products Pitched</div>
+      <div class="card-body">~$12M revenue secured by driving AI initiatives for BFSI and Retail clients — developed scope, business cases, and benchmarking frameworks, increasing proposal win rate by ~7%.</div>
+      <span class="card-metric">$12M secured</span><span class="card-metric">AI-Native SaaS</span>
     </div>
 
     <div class="card red-accent" data-cat="work">
       <div class="card-corner"></div>
       <div class="card-tag"><span class="dot dot-red"></span>Diwas by Manyavar · GTM</div>
-      <div class="card-title">0→1 GTM Strategy</div>
-      <div class="card-body">Mapped fragmented user journeys across online marketplaces and Tier 2/3 physical stores. Defined positioning, pricing, and channel mix for a brand launch from scratch.</div>
+      <div class="card-title">0→1 Retail GTM Strategy</div>
+      <div class="card-body">Led the market penetration, pilot, & GTM strategy for a new product line, Diwas, targeting Tier-2/3 markets and e-commerce marketplaces.</div>
       <span class="card-metric">Pricing strategy</span><span class="card-metric">Channel mapping</span>
     </div>
 
@@ -467,11 +459,11 @@ function scrollToSection(id) {
     <div class="section-num">03</div>
   </div>
   <div class="contact-row" style="margin-bottom:64px;">
-    <a href="/cdn-cgi/l/email-protection#8af9a4fcebfef9ebb8babbbfcaede7ebe3e6a4e9e5e7" class="contact-item">
+    <a href="mailto:s.vatsa2015@gmail.com" class="contact-item">
       <div class="contact-icon">✉</div>
       <div class="contact-detail">
         <div class="contact-label">Email</div>
-        <div class="contact-value"><span class="__cf_email__" data-cfemail="89faa7ffe8fdfae8bbb9b8bcc9eee4e8e0e5a7eae6e4">[email&#160;protected]</span></div>
+        <div class="contact-value">s.vatsa2015@gmail.com</div>
       </div>
     </a>
     <a href="https://www.linkedin.com/in/saumya-vatsa-ximb/" target="_blank" class="contact-item">
