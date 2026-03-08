@@ -221,15 +221,17 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 .blog-title em { font-style: italic; color: var(--blue); text-transform: none; }
 .blog-meta { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(18,18,18,.5); display: flex; gap: 20px; flex-wrap: wrap; font-weight: 700; }
 .blog-screenshot-wrap { margin: 0 0 12px; display: flex; justify-content: center; }
-.blog-screenshot-wrap img { display: block; width: 100%; max-width: 560px; height: auto; border: var(--border); box-shadow: var(--shadow-md); }
+.blog-screenshot-wrap img { display: block; width: 100%; height: auto; border: var(--border); box-shadow: var(--shadow-md); }
 .blog-img-caption { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(18,18,18,.4); text-align: center; margin-bottom: 52px; font-weight: 700; }
-.blog-body { max-width: 680px; }
-.blog-body p { font-size: 14px; line-height: 1.9; color: #3a3733; margin-bottom: 24px; font-weight: 500; }
-.blog-body h2 { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -.02em; text-transform: uppercase; margin: 48px 0 16px; line-height: 1.1; border-left: 5px solid var(--red); padding-left: 16px; }
-.callout { background: var(--white); border: var(--border2); border-left: 5px solid var(--blue); padding: 20px 24px; margin: 32px 0; font-size: 13px; line-height: 1.8; color: #3a3733; font-weight: 500; }
+.blog-body { width: 100%; }
+.blog-body p { font-size: 14px; line-height: 1.9; color: #3a3733; margin-bottom: 24px; font-weight: 500; max-width: 720px; }
+.blog-body h2 { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -.02em; text-transform: uppercase; margin: 48px 0 16px; line-height: 1.1; border-left: 5px solid var(--red); padding-left: 16px; max-width: 720px; }
+.blog-body p { font-size: 14px; line-height: 1.9; color: #3a3733; margin-bottom: 28px; font-weight: 500; max-width: 720px; }
+.blog-body h2 { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -.02em; text-transform: uppercase; margin: 52px 0 20px; line-height: 1.1; border-left: 5px solid var(--red); padding-left: 16px; max-width: 720px; }
+.callout { background: var(--white); border: var(--border2); border-left: 5px solid var(--blue); padding: 20px 24px; margin: 28px 0; font-size: 13px; line-height: 1.8; color: #3a3733; font-weight: 500; }
 .callout strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
 .callout code { font-family: 'Courier New', monospace; font-size: 12px; background: rgba(16,64,192,.08); padding: 1px 5px; }
-.learning-list { margin: 0 0 24px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.learning-list { margin: 0 0 28px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .learning-list li { font-size: 13px; line-height: 1.75; color: #3a3733; padding: 16px 20px; background: var(--white); border: var(--border2); display: flex; gap: 16px; align-items: flex-start; font-weight: 500; }
 .learning-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 12px; color: var(--white); background: var(--red); flex-shrink: 0; padding: 2px 7px; padding-top: 1px; }
 .learning-text strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
@@ -246,14 +248,33 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 .blog-bottom-nav .back-link::before { content: '←'; }
 
 /* VIDEO PLACEHOLDER */
-.video-placeholder { width: 100%; max-width: 680px; aspect-ratio: 16/9; background: var(--ink); border: var(--border); box-shadow: var(--shadow-md); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; margin: 0 0 12px; position: relative; overflow: hidden; }
+.video-placeholder { width: 100%; aspect-ratio: 16/9; background: var(--ink); border: var(--border); box-shadow: var(--shadow-md); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; margin: 0 0 12px; position: relative; overflow: hidden; }
 .video-placeholder::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.02) 20px, rgba(255,255,255,.02) 21px); }
 .video-play-btn { width: 72px; height: 72px; border: 3px solid var(--yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
 .video-play-btn::after { content: ''; border-left: 24px solid var(--yellow); border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 4px; }
 .video-placeholder-label { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.4); position: relative; z-index: 1; }
 .video-placeholder-sub { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.25); position: relative; z-index: 1; border: 1px dashed rgba(255,255,255,.2); padding: 4px 12px; font-weight: 500; }
 </style>
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  var pg = document.getElementById(id);
+  if (pg) { pg.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+function goHome() { showPage('page-home'); }
+function showBlog(slug) { showPage('page-blog-' + slug); }
+function scrollToSection(id) {
+  showPage('page-home');
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      var el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+</script>
 </head>
+<body>
 <body>
 
 <!-- NAV -->
@@ -446,11 +467,11 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
     <div class="section-num">03</div>
   </div>
   <div class="contact-row" style="margin-bottom:64px;">
-    <a href="mailto:s.vatsa2015@gmail.com" class="contact-item">
+    <a href="/cdn-cgi/l/email-protection#8af9a4fcebfef9ebb8babbbfcaede7ebe3e6a4e9e5e7" class="contact-item">
       <div class="contact-icon">✉</div>
       <div class="contact-detail">
         <div class="contact-label">Email</div>
-        <div class="contact-value">s.vatsa2015@gmail.com</div>
+        <div class="contact-value"><span class="__cf_email__" data-cfemail="89faa7ffe8fdfae8bbb9b8bcc9eee4e8e0e5a7eae6e4">[email&#160;protected]</span></div>
       </div>
     </a>
     <a href="https://www.linkedin.com/in/saumya-vatsa-ximb/" target="_blank" class="contact-item">
@@ -486,28 +507,19 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 
   <div class="blog-body">
 
-    <!-- VIDEO PLACEHOLDER: To add video, replace src="" in the <source> tag below,
-         or swap in a YouTube embed iframe. Then remove the .video-placeholder div
-         and show the video element instead. -->
-  <!--  <div class="video-placeholder">
-      <div class="video-play-btn"></div>
-      <div class="video-placeholder-label">App Demo Video</div> -->
-      <div class="video-placeholder-sub">→ paste your video URL into &lt;source src="https://drive.google.com/file/d/173d-95tV9DxRQwRgkcFbpi_BSOEJIM44/view?usp=sharing"&gt; below</div>
-    </div>
-    <!-- Uncomment and fill src to use self-hosted video: -->
-    <video controls width="100%" style="max-width:680px;border:4px solid #121212;box-shadow:6px 6px 0 0 #121212;display:block;margin-bottom:12px;">
-      <source src="https://drive.google.com/file/d/173d-95tV9DxRQwRgkcFbpi_BSOEJIM44/view?usp=sharing" type="video/mp4">
-    </video>
-    
-    <!-- Or paste a YouTube embed iframe here -->
+    <a href="https://youtu.be/RfZCsKoOcbc" target="_blank" rel="noopener"
+       style="display:block;position:relative;width:100%;aspect-ratio:16/9;margin:0 0 12px;border:4px solid #121212;box-shadow:6px 6px 0 0 #121212;overflow:hidden;text-decoration:none;background:#000;">
+      <img src="https://img.youtube.com/vi/RfZCsKoOcbc/maxresdefault.jpg"
+           alt="Bubble Bloom App Demo"
+           style="width:100%;height:100%;object-fit:cover;opacity:0.85;display:block;">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+        <div style="width:72px;height:72px;border-radius:50%;background:rgba(208,32,32,0.9);display:flex;align-items:center;justify-content:center;box-shadow:4px 4px 0 0 #121212;">
+          <div style="width:0;height:0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:24px solid #fff;margin-left:4px;"></div>
+        </div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(18,18,18,0.7);padding:4px 12px;">Watch on YouTube →</div>
+      </div>
+    </a>
     <div class="blog-img-caption">App demo · Bubble Bloom</div>
-
-    <div class="blog-screenshot-wrap">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
-           alt="Bubble Bloom — bubble grid mid-session"
-           width="634" height="600">
-    </div>
-    <div class="blog-img-caption">Bubble Bloom mid-session — pop the grid to reveal a hidden painting</div>
 
     <div class="try-it">
       <div class="try-it-text">
@@ -529,12 +541,12 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 
     <ul class="learning-list">
       <li><span class="learning-num">01</span><span class="learning-text"><strong>Busy employees</strong> — need a 2-minute mental reset between meetings. The product must be openable, completable, and closeable within a calendar gap. No loading screens. No decisions.</span></li>
-      <li><span class="learning-num">02</span><span class="learning-text"><strong>Neurodivergent users</strong> (ADHD, autism, sensory processing differences) — benefit from repetitive, low-stakes sensory input. The interaction pattern — tap to pop, one action, one reward — was designed specifically for this group, not as an afterthought.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Neurodivergent users</strong> (ADHD, sensory processing differences) — benefit from repetitive, low-stakes sensory input. The interaction pattern — tap to pop, one action, one reward — was designed specifically for this group, not as an afterthought.</span></li>
       <li><span class="learning-num">03</span><span class="learning-text"><strong>Students</strong> — short decompression during study sessions or exam periods. Completion in under 3 minutes was a hard product constraint, not a nice-to-have.</span></li>
       <li><span class="learning-num">04</span><span class="learning-text"><strong>Caregivers</strong> (parents, nurses, social workers) — micro-recovery moments in high-demand schedules. Often on mobile, often interrupted. The product had to be resumable at any point without losing progress.</span></li>
       <li><span class="learning-num">05</span><span class="learning-text"><strong>People with anxiety</strong> — grounding through predictable, satisfying interaction. Predictability was a design principle: every pop behaves identically, every sound follows the same pattern.</span></li>
       <li><span class="learning-num">06</span><span class="learning-text"><strong>Insomniacs</strong> — a calming screen activity that isn't doom-scrolling. No algorithmic feed. No infinite scroll. A finite, completable loop with a clear endpoint.</span></li>
-      <li><span class="learning-num">07</span><span class="learning-text"><strong>Chronic pain sufferers</strong> — passive sensory engagement with no dexterity demands. Single tap or click only: no drag, no swipe, no precision required.</span></li>
+
     </ul>
 
     <p>Understanding these users before writing any spec shaped every subsequent decision — from the 30–60 bubble grid size (enough to feel satisfying, not so many it becomes a chore) to the decision to make audio purely optional with a persistent mute toggle.</p>
@@ -605,7 +617,6 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 </div>
 </div>
 
-
 <!-- BLOG: WHODUNNIT -->
 <div id="page-blog-murder" class="page">
 <div class="container">
@@ -620,10 +631,10 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 
     <div class="try-it">
       <div class="try-it-text">
-        <strong>🔪 Try it — whodunnit.lovable.app</strong>
+        <strong>🔪 Try it — whodunit.lovable.app</strong>
         Pick a tone, setting, difficulty, and detective avatar. An AI generates your entire case — unique suspects, alibis, evidence, red herrings, and a pre-committed killer. No two mysteries are the same.
       </div>
-      <a href="https://whodunnit.lovable.app" target="_blank" class="try-it-btn">Play Whodunnit →</a>
+      <a href="https://whodunit.lovable.app" target="_blank" class="try-it-btn">Play Whodunnit →</a>
     </div>
 
     <p>Most games lie to you about replayability. They shuffle the same deck. Whodunnit does something different: it generates the entire mystery from scratch every session — different victim, different killer, different motive, different evidence trail — driven entirely by the tone, setting, and difficulty you configure at the start. The AI is not filling in a template. It is writing a new case.</p>
@@ -709,36 +720,14 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 </div>
 
 <script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  var pg = document.getElementById(id);
-  if (pg) { pg.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-}
-function goHome() { showPage('page-home'); }
-function showBlog(slug) { showPage('page-blog-' + slug); }
-function scrollToSection(id) {
-  showPage('page-home');
-  requestAnimationFrame(function() {
-    requestAnimationFrame(function() {
-      var el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-  // Filter tabs
   document.querySelectorAll('.filter-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
       var filter = btn.dataset.filter;
       document.getElementById('work-grid').querySelectorAll('.card').forEach(function(card) {
-        if (filter === 'all' || card.dataset.cat === filter) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
       });
     });
   });
