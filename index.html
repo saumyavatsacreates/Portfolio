@@ -64,7 +64,7 @@ nav { padding: 0 48px; display: flex; align-items: stretch; justify-content: spa
 .hero-geo-bg .geo-dot-grid { position: absolute; inset: 0; background-image: radial-gradient(#12121212 1.5px, transparent 1.5px); background-size: 28px 28px; }
 .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
 .hero-eyebrow-bar { width: 40px; height: 4px; background: var(--red); flex-shrink: 0; }
-.hero-eyebrow-text { font-size: 16px; letter-spacing: .12em; text-transform: uppercase; font-weight: 900; color: var(--red); }
+.hero-eyebrow-text { font-size: 26px; letter-spacing: .08em; text-transform: uppercase; font-weight: 900; color: var(--red); }
 .hero-headline { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: clamp(44px, 5vw, 80px); line-height: .95; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 32px; position: relative; z-index: 1; }
 .hero-headline .line-accent { color: var(--red); }
 .hero-headline .line-italic { font-style: italic; font-weight: 900; color: var(--green); display: block; }
@@ -87,16 +87,15 @@ nav { padding: 0 48px; display: flex; align-items: stretch; justify-content: spa
 .photo-cards { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; gap: 12px; width: 100%; max-width: 380px; position: relative; z-index: 2; }
 .photo-card { border: 3px solid rgba(255,255,255,.7); box-shadow: 5px 5px 0px 0px rgba(0,0,0,.4); transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease; position: relative; overflow: hidden; cursor: pointer; background: rgba(0,0,0,.2); }
 .photo-card:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 8px 12px 0px 0px rgba(0,0,0,.5); z-index: 5; }
-.photo-card:nth-child(1) { grid-column:1; grid-row:1; background: #c4522a; }
-.photo-card:nth-child(2) { grid-column:2; grid-row:1/3; }
-.photo-card:nth-child(3) { grid-column:1; grid-row:2; background: var(--ink); }
-.photo-card-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 14px 12px; overflow: hidden; }
-.photo-card:nth-child(1) .photo-card-inner { background: linear-gradient(150deg, #c4522a 0%, #9c3a1e 100%); }
-.photo-card:nth-child(1) .photo-card-inner::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; border-radius: 50%; border: 32px solid rgba(255,255,255,.15); }
-.photo-card:nth-child(2) .photo-card-inner { background: var(--ink); background-image: repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(255,255,255,.04) 23px, rgba(255,255,255,.04) 24px), repeating-linear-gradient(90deg, transparent, transparent 23px, rgba(255,255,255,.04) 23px, rgba(255,255,255,.04) 24px); }
-.photo-card:nth-child(2) .photo-card-inner::before { content: ''; position: absolute; top: 20px; left: 16px; width: 44px; height: 44px; background: var(--yellow); opacity: .6; transform: rotate(18deg); }
-.photo-card:nth-child(3) .photo-card-inner { background: linear-gradient(140deg, #2a5c3a 0%, #1e3d28 100%); }
-.photo-card:nth-child(3) .photo-card-inner::before { content: ''; position: absolute; top: -20px; right: -20px; width: 0; height: 0; border-left: 80px solid transparent; border-bottom: 80px solid rgba(255,255,255,.12); }
+.photo-card:nth-child(1) { grid-column:1; grid-row:1; background: #1a1a1a; }
+.photo-card:nth-child(2) { grid-column:2; grid-row:1/3; background: #1a1a1a; }
+.photo-card:nth-child(3) { grid-column:1; grid-row:2; background: #1a1a1a; }
+.photo-card-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 14px 12px; overflow: hidden; background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%); }
+.photo-card:nth-child(1) .photo-card-inner::before { display: none; }
+.photo-card:nth-child(2) .photo-card-inner { background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%); }
+.photo-card:nth-child(2) .photo-card-inner::before { display: none; }
+.photo-card:nth-child(3) .photo-card-inner { background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%); }
+.photo-card:nth-child(3) .photo-card-inner::before { display: none; }
 .photo-person { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 65%; max-width: 140px; opacity: .2; pointer-events: none; }
 .photo-label { position: relative; z-index: 2; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.9); line-height: 1; }
 .photo-num { position: absolute; top: 10px; right: 12px; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 42px; line-height: 1; color: rgba(255,255,255,.1); pointer-events: none; z-index: 1; }
@@ -336,28 +335,24 @@ function scrollToSection(id) {
     </div>
     <div class="photo-cards anim-in" style="animation-delay:.5s">
       <div class="photo-card">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDAwIDIwMCI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiMwZjBhMWEiLz4KICA8IS0tIGxhcmdlIGJhY2tncm91bmQgY2lyY2xlIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9Ijk1IiByPSIxMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDQiIHN0cm9rZS13aWR0aD0iNDAiLz4KICA8IS0tIGxpZ2h0YnVsYiBib2R5IC0tPgogIDxwYXRoIGQ9Ik0yMDAgMzAgQzE3MCAzMCAxNDggNTIgMTQ4IDgyIEMxNDggMTAyIDE1OCAxMTggMTcyIDEyOCBMMTcyIDE0OCBMMjI4IDE0OCBMMjI4IDEyOCBDMjQyIDExOCAyNTIgMTAyIDI1MiA4MiBDMjUyIDUyIDIzMCAzMCAyMDAgMzBaIiBmaWxsPSJub25lIiBzdHJva2U9IiNGMEMwMjAiIHN0cm9rZS13aWR0aD0iNCIvPgogIDwhLS0gYnVsYiBmaWxsIGdsb3cgLS0+CiAgPHBhdGggZD0iTTIwMCAzOCBDMTc0IDM4IDE1NiA1NyAxNTYgODIgQzE1NiAxMDAgMTY1IDExNCAxNzggMTIzIEwxNzggMTQyIEwyMjIgMTQyIEwyMjIgMTIzIEMyMzUgMTE0IDI0NCAxMDAgMjQ0IDgyIEMyNDQgNTcgMjI2IDM4IDIwMCAzOFoiIGZpbGw9IiNGMEMwMjAiIGZpbGwtb3BhY2l0eT0iMC4xMiIvPgogIDwhLS0gYmFzZSBsaW5lcyAtLT4KICA8cmVjdCB4PSIxNzgiIHk9IjE1MCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjYiIGZpbGw9IiNGMEMwMjAiIHJ4PSIwIi8+CiAgPHJlY3QgeD0iMTgzIiB5PSIxNjAiIHdpZHRoPSIzNCIgaGVpZ2h0PSI2IiBmaWxsPSIjRjBDMDIwIiBvcGFjaXR5PSIwLjYiIHJ4PSIwIi8+CiAgPHJlY3QgeD0iMTg5IiB5PSIxNzAiIHdpZHRoPSIyMiIgaGVpZ2h0PSI1IiBmaWxsPSIjRjBDMDIwIiBvcGFjaXR5PSIwLjM1IiByeD0iMCIvPgogIDwhLS0gZmlsYW1lbnQgY3Jvc3MgLS0+CiAgPGxpbmUgeDE9IjIwMCIgeTE9IjYwIiB4Mj0iMjAwIiB5Mj0iMTE1IiBzdHJva2U9IiNGMEMwMjAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW9wYWNpdHk9IjAuNSIvPgogIDxsaW5lIHgxPSIxNzYiIHkxPSI4OCIgeDI9IjIyNCIgeTI9Ijg4IiBzdHJva2U9IiNGMEMwMjAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW9wYWNpdHk9IjAuNSIvPgogIDwhLS0gZG90IGFjY2VudCAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSI4OCIgcj0iNiIgZmlsbD0iI0YwQzAyMCIvPgogIDwhLS0gbGFiZWwgLS0+CiAgPHRleHQgeD0iMjAwIiB5PSIxOTMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iOCIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4zIiBsZXR0ZXItc3BhY2luZz0iNCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UFJPRFVDVDwvdGV4dD4KPC9zdmc+" alt="Product" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.75;">
         <div class="photo-card-inner">
-          <span class="photo-num">01</span>
-          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
+
           <div class="photo-label">Product</div>
-          <div class="photo-hint">→ add photo</div>
         </div>
       </div>
       <div class="photo-card">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNDEyIiB2aWV3Qm94PSIwIDAgMjAwIDQxMiI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSI0MTIiIGZpbGw9IiMwYTBhMWYiLz4KICA8IS0tIGNvbXBhc3Mgcm9zZSBiYWNrZ3JvdW5kIHJpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTkwIiByPSI5MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTA0MEMwIiBzdHJva2Utb3BhY2l0eT0iMC4xMiIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTkwIiByPSI3MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTA0MEMwIiBzdHJva2Utb3BhY2l0eT0iMC4xIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8IS0tIGNvbXBhc3MgY2FyZGluYWwgcG9pbnRzIC0tPgogIDwhLS0gTm9ydGggYXJyb3cgLSBzb2xpZCAtLT4KICA8cG9seWdvbiBwb2ludHM9IjEwMCwxMDAgMTA3LDE3NSAxMDAsMTY1IDkzLDE3NSIgZmlsbD0iI0QwMjAyMCIvPgogIDwhLS0gU291dGggYXJyb3cgLSBvdXRsaW5lIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iMTAwLDI4MCAxMDcsMjA1IDEwMCwyMTUgOTMsMjA1IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIEVhc3QgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxOTAsMTkwIDExNSwxODMgMTI1LDE5MCAxMTUsMTk3IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIFdlc3QgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxMCwxOTAgODUsMTgzIDc1LDE5MCA4NSwxOTciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIHN0cm9rZS13aWR0aD0iMiIvPgogIDwhLS0gZGlhZ29uYWwgdGlja3MgLS0+CiAgPGxpbmUgeDE9IjEzNyIgeTE9IjEyNyIgeDI9IjEyOSIgeTI9IjEzNSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4xNSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8bGluZSB4MT0iMTM3IiB5MT0iMjUzIiB4Mj0iMTI5IiB5Mj0iMjQ1IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxsaW5lIHgxPSI2MyIgeTE9IjEyNyIgeDI9IjcxIiB5Mj0iMTM1IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxsaW5lIHgxPSI2MyIgeTE9IjI1MyIgeDI9IjcxIiB5Mj0iMjQ1IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDwhLS0gY2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxOTAiIHI9IjgiIGZpbGw9IiMxMDQwQzAiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxOTAiIHI9IjMiIGZpbGw9IiNmZmZmZmYiLz4KICA8IS0tIE4gbGFiZWwgLS0+CiAgPHRleHQgeD0iMTAwIiB5PSI5NSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxMSIgZmlsbD0iI0QwMjAyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIxIj5OPC90ZXh0PgogIDwhLS0gdG9wIGxhYmVsIC0tPgogIDx0ZXh0IHg9IjEwMCIgeT0iMzgiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iOCIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4zIiBsZXR0ZXItc3BhY2luZz0iNCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+U1RSQVRFR1k8L3RleHQ+CiAgPCEtLSBib3R0b20gc3RhdCAtLT4KICA8bGluZSB4MT0iMjAiIHkxPSIzMzAiIHgyPSIxODAiIHkyPSIzMzAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDgiIHN0cm9rZS13aWR0aD0iMSIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMzU4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjI4IiBmaWxsPSIjMTA0MEMwIiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MzYwwrA8L3RleHQ+CiAgPHRleHQgeD0iMTAwIiB5PSIzNzgiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNyIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4zIiBsZXR0ZXItc3BhY2luZz0iMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TUFSS0VUIFZJRVc8L3RleHQ+CiAgPHRleHQgeD0iMTAwIiB5PSI0MDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNyIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4yIiBsZXR0ZXItc3BhY2luZz0iMiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+R1RNIMK3IFBJTE9UUyDCtyBDSEFOTkVMUzwvdGV4dD4KPC9zdmc+" alt="Strategy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.7;">
         <div class="photo-card-inner">
-          <span class="photo-num">02</span>
-          <span class="photo-star">✦</span>
-          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
+
           <div class="photo-label">Strategy</div>
-          <div class="photo-hint">→ add photo</div>
         </div>
       </div>
       <div class="photo-card">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDAwIDIwMCI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiMwNTBkMGYiLz4KICA8IS0tIG91dGVyIGdsb3cgcmluZyAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSI5NSIgcj0iNzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMDgiIHN0cm9rZS13aWR0aD0iMjAiLz4KICA8IS0tIHJvYm90IGhlYWQgb3V0bGluZSAtLT4KICA8cmVjdCB4PSIxNTIiIHk9IjM4IiB3aWR0aD0iOTYiIGhlaWdodD0iODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPCEtLSBhbnRlbm5hIC0tPgogIDxsaW5lIHgxPSIyMDAiIHkxPSIzOCIgeDI9IjIwMCIgeTI9IjIyIiBzdHJva2U9IiNEMDIwMjAiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjE4IiByPSI2IiBmaWxsPSIjRDAyMDIwIi8+CiAgPCEtLSBleWVzIC0tPgogIDxyZWN0IHg9IjE2NyIgeT0iNTYiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxNiIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC44NSIvPgogIDxyZWN0IHg9IjIxMSIgeT0iNTYiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxNiIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC44NSIvPgogIDwhLS0gZXllIHNoaW5lIC0tPgogIDxyZWN0IHg9IjE3MCIgeT0iNTkiIHdpZHRoPSI2IiBoZWlnaHQ9IjUiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNiIvPgogIDxyZWN0IHg9IjIxNCIgeT0iNTkiIHdpZHRoPSI2IiBoZWlnaHQ9IjUiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNiIvPgogIDwhLS0gbW91dGggLyBncmlsbCBsaW5lcyAtLT4KICA8bGluZSB4MT0iMTcwIiB5MT0iOTAiIHgyPSIyMzAiIHkyPSI5MCIgc3Ryb2tlPSIjRDAyMDIwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1vcGFjaXR5PSIwLjciLz4KICA8bGluZSB4MT0iMTc1IiB5MT0iOTgiIHgyPSIyMjUiIHkyPSI5OCIgc3Ryb2tlPSIjRDAyMDIwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1vcGFjaXR5PSIwLjQ1Ii8+CiAgPGxpbmUgeDE9IjE4MCIgeTE9IjEwNiIgeDI9IjIyMCIgeTI9IjEwNiIgc3Ryb2tlPSIjRDAyMDIwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1vcGFjaXR5PSIwLjI1Ii8+CiAgPCEtLSBuZWNrIC0tPgogIDxyZWN0IHg9IjE4OCIgeT0iMTE4IiB3aWR0aD0iMjQiIGhlaWdodD0iMTAiIGZpbGw9IiNEMDIwMjAiIG9wYWNpdHk9IjAuNSIvPgogIDwhLS0gc2hvdWxkZXJzIC8gYmFzZSAtLT4KICA8cmVjdCB4PSIxNTIiIHk9IjEyOCIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjgiIGZpbGw9IiNEMDIwMjAiIG9wYWNpdHk9IjAuMyIvPgogIDwhLS0gY2lyY3VpdCB0cmFjZXMgbGVmdCAtLT4KICA8cG9seWxpbmUgcG9pbnRzPSIxNTIsNzAgMTMyLDcwIDEzMiw5MCAxMTgsOTAiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIwLjQiLz4KICA8Y2lyY2xlIGN4PSIxMTgiIGN5PSI5MCIgcj0iNCIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC41Ii8+CiAgPHBvbHlsaW5lIHBvaW50cz0iMTUyLDkwIDEzNiw5MCAxMzYsMTEwIDEyMCwxMTAiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIwLjI1Ii8+CiAgPGNpcmNsZSBjeD0iMTIwIiBjeT0iMTEwIiByPSIzIiBmaWxsPSIjRDAyMDIwIiBvcGFjaXR5PSIwLjM1Ii8+CiAgPCEtLSBjaXJjdWl0IHRyYWNlcyByaWdodCAtLT4KICA8cG9seWxpbmUgcG9pbnRzPSIyNDgsNzAgMjY4LDcwIDI2OCw5MCAyODIsOTAiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIwLjQiLz4KICA8Y2lyY2xlIGN4PSIyODIiIGN5PSI5MCIgcj0iNCIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC41Ii8+CiAgPHBvbHlsaW5lIHBvaW50cz0iMjQ4LDkwIDI2NCw5MCAyNjQsMTEwIDI4MCwxMTAiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIwLjI1Ii8+CiAgPGNpcmNsZSBjeD0iMjgwIiBjeT0iMTEwIiByPSIzIiBmaWxsPSIjRDAyMDIwIiBvcGFjaXR5PSIwLjM1Ii8+CiAgPCEtLSBsYWJlbCAtLT4KICA8dGV4dCB4PSIyMDAiIHk9IjE3NSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSI4IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjMiIGxldHRlci1zcGFjaW5nPSI0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BSSDCtyBGSVJTVDwvdGV4dD4KICA8IS0tIHNtYWxsIGJpbmFyeSBkZWNvcmF0aW9uIC0tPgogIDx0ZXh0IHg9IjIwIiB5PSIzMCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSI3IiBmaWxsPSIjRDAyMDIwIiBvcGFjaXR5PSIwLjIiPjAxMDAxMTAwIDAxMDAxMTAwIDAxMDAxMTAxPC90ZXh0PgogIDx0ZXh0IHg9IjIwIiB5PSIxODUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNyIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC4xNSI+MTAxMTAxMDAgMTEwMDEwMTAgMDAxMTAxMDE8L3RleHQ+Cjwvc3ZnPg==" alt="AI-first" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.7;">
         <div class="photo-card-inner">
-          <span class="photo-num">03</span>
-          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
+
           <div class="photo-label">AI-first</div>
-          <div class="photo-hint">→ add photo</div>
         </div>
       </div>
     </div>
@@ -459,11 +454,11 @@ function scrollToSection(id) {
     <div class="section-num">03</div>
   </div>
   <div class="contact-row" style="margin-bottom:64px;">
-    <a href="mailto:s.vatsa2015@gmail.com" class="contact-item">
+    <a href="/cdn-cgi/l/email-protection#c5b6ebb3a4b1b6a4f7f5f4f085a2a8a4aca9eba6aaa8" class="contact-item">
       <div class="contact-icon">✉</div>
       <div class="contact-detail">
         <div class="contact-label">Email</div>
-        <div class="contact-value">s.vatsa2015@gmail.com</div>
+        <div class="contact-value"><span class="__cf_email__" data-cfemail="41326f37203532207371707401262c20282d6f222e2c">[email&#160;protected]</span></div>
       </div>
     </a>
     <a href="https://www.linkedin.com/in/saumya-vatsa-ximb/" target="_blank" class="contact-item">
@@ -711,19 +706,10 @@ function scrollToSection(id) {
 </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.filter-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
-      var filter = btn.dataset.filter;
-      document.getElementById('work-grid').querySelectorAll('.card').forEach(function(card) {
-        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
-      });
-    });
-  });
-});
-</script>
-</body>
-</html>
+      var filter = btn.dataset.fil
