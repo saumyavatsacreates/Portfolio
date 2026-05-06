@@ -2,6 +2,7 @@ Whodunit is a browser-based, AI-generated murder mystery game played in a single
 
 The player works through an eight-screen investigation arc: examining evidence, expanding suspect profiles, making investigative choices with AI-generated consequences, and unlocking a killer reveal gated behind demonstrated investigation effort. The reveal is never random — the killer was pre-committed in the generation step.
 
-CORE PRODUCT PREMISE
+**CORE PRODUCT PREMISE**
+
 The killer is not determined at reveal time. The LLM bakes the killer’s identity, motive, and evidence trail into the generated mystery from the outset. Every clue is internally consistent with that answer. The reveal is earned through investigation, not assigned by a random number generator.
 
