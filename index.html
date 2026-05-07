@@ -9,7 +9,6 @@
 :root {
   --bg:     #F0F0F0;
   --ink:    #121212;
-  --green:  #008000;
   --red:    #D02020;
   --blue:   #1040C0;
   --yellow: #F0C020;
@@ -23,7 +22,10 @@
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 500; overflow-x: hidden; }
+body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 500; overflow-x: hidden; cursor: none; }
+.cursor { width: 12px; height: 12px; background: var(--red); border-radius: 0; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .12s, height .12s, background .12s; }
+.cursor.big { width: 40px; height: 40px; background: var(--yellow); border-radius: 0; }
+@media(hover:none) { .cursor { display: none; } body { cursor: auto; } }
 .page { display: none; }
 .page.active { display: block; }
 .container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
@@ -36,24 +38,12 @@ nav { padding: 0 48px; display: flex; align-items: stretch; justify-content: spa
 .nav-shapes { display: flex; gap: 6px; align-items: center; }
 .nav-shape-circle { width: 16px; height: 16px; border-radius: 50%; background: var(--red); }
 .nav-shape-square { width: 16px; height: 16px; background: var(--yellow); }
-.nav-shape-tri { width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; border-bottom: 16px solid var(--green); }
+.nav-shape-tri { width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; border-bottom: 16px solid var(--blue); }
 .nav-name { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--white); line-height: 1; }
 .nav-tagline { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-top: 2px; }
 .nav-links { display: flex; }
 .nav-link { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; padding: 0 24px; background: transparent; color: rgba(255,255,255,.7); cursor: pointer; border: none; border-left: 2px solid rgba(255,255,255,.12); transition: color .15s, background .15s; display: flex; align-items: center; }
 .nav-link:hover { color: var(--yellow); background: rgba(255,255,255,.06); }
-
-/* NAV MOBILE */
-@media(max-width:640px) {
-  nav { padding: 0 16px; height: 56px; }
-  .nav-brand { padding-right: 14px; gap: 8px; border-right: 2px solid #121212; }
-  .nav-shapes { gap: 5px; }
-  .nav-shape-circle, .nav-shape-square { width: 12px; height: 12px; }
-  .nav-shape-tri { border-left-width: 6px; border-right-width: 6px; border-bottom-width: 12px; }
-  .nav-name { font-size: 11px; letter-spacing: .1em; }
-  .nav-tagline { font-size: 8px; }
-  .nav-link { padding: 0 14px; font-size: 9px; }
-}
 
 /* HERO */
 .hero-wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 64px); border-bottom: var(--border); }
@@ -64,10 +54,10 @@ nav { padding: 0 48px; display: flex; align-items: stretch; justify-content: spa
 .hero-geo-bg .geo-dot-grid { position: absolute; inset: 0; background-image: radial-gradient(#12121212 1.5px, transparent 1.5px); background-size: 28px 28px; }
 .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
 .hero-eyebrow-bar { width: 40px; height: 4px; background: var(--red); flex-shrink: 0; }
-.hero-eyebrow-text { font-size: 26px; letter-spacing: .08em; text-transform: uppercase; font-weight: 900; color: var(--red); }
+.hero-eyebrow-text { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--red); }
 .hero-headline { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: clamp(44px, 5vw, 80px); line-height: .95; letter-spacing: -.03em; text-transform: uppercase; margin-bottom: 32px; position: relative; z-index: 1; }
-.hero-headline .line-accent { color: var(--red); }
-.hero-headline .line-italic { font-style: italic; font-weight: 900; color: var(--green); display: block; }
+.hero-headline .line-accent { color: var(--blue); }
+.hero-headline .line-italic { font-style: italic; font-weight: 900; color: var(--red); display: block; }
 .hero-body { font-size: 14px; line-height: 1.85; color: #3a3a3a; max-width: 480px; margin-bottom: 40px; position: relative; z-index: 1; font-weight: 500; }
 .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
 .btn { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; padding: 14px 28px; border: var(--border2); cursor: pointer; transition: transform .15s ease-out, box-shadow .15s ease-out, background .15s; border-radius: 0; display: inline-flex; align-items: center; gap: 8px; }
@@ -87,15 +77,16 @@ nav { padding: 0 48px; display: flex; align-items: stretch; justify-content: spa
 .photo-cards { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; gap: 12px; width: 100%; max-width: 380px; position: relative; z-index: 2; }
 .photo-card { border: 3px solid rgba(255,255,255,.7); box-shadow: 5px 5px 0px 0px rgba(0,0,0,.4); transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease; position: relative; overflow: hidden; cursor: pointer; background: rgba(0,0,0,.2); }
 .photo-card:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 8px 12px 0px 0px rgba(0,0,0,.5); z-index: 5; }
-.photo-card:nth-child(1) { grid-column:1; grid-row:1; background: #1a1a1a; }
-.photo-card:nth-child(2) { grid-column:2; grid-row:1/3; background: #1a1a1a; }
-.photo-card:nth-child(3) { grid-column:1; grid-row:2; background: #1a1a1a; }
-.photo-card-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 14px 12px; overflow: hidden; background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%); }
-.photo-card:nth-child(1) .photo-card-inner::before { display: none; }
-.photo-card:nth-child(2) .photo-card-inner { background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%); }
-.photo-card:nth-child(2) .photo-card-inner::before { display: none; }
-.photo-card:nth-child(3) .photo-card-inner { background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%); }
-.photo-card:nth-child(3) .photo-card-inner::before { display: none; }
+.photo-card:nth-child(1) { grid-column:1; grid-row:1; background: #c4522a; }
+.photo-card:nth-child(2) { grid-column:2; grid-row:1/3; }
+.photo-card:nth-child(3) { grid-column:1; grid-row:2; background: var(--ink); }
+.photo-card-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 14px 12px; overflow: hidden; }
+.photo-card:nth-child(1) .photo-card-inner { background: linear-gradient(150deg, #c4522a 0%, #9c3a1e 100%); }
+.photo-card:nth-child(1) .photo-card-inner::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; border-radius: 50%; border: 32px solid rgba(255,255,255,.15); }
+.photo-card:nth-child(2) .photo-card-inner { background: var(--ink); background-image: repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(255,255,255,.04) 23px, rgba(255,255,255,.04) 24px), repeating-linear-gradient(90deg, transparent, transparent 23px, rgba(255,255,255,.04) 23px, rgba(255,255,255,.04) 24px); }
+.photo-card:nth-child(2) .photo-card-inner::before { content: ''; position: absolute; top: 20px; left: 16px; width: 44px; height: 44px; background: var(--yellow); opacity: .6; transform: rotate(18deg); }
+.photo-card:nth-child(3) .photo-card-inner { background: linear-gradient(140deg, #2a5c3a 0%, #1e3d28 100%); }
+.photo-card:nth-child(3) .photo-card-inner::before { content: ''; position: absolute; top: -20px; right: -20px; width: 0; height: 0; border-left: 80px solid transparent; border-bottom: 80px solid rgba(255,255,255,.12); }
 .photo-person { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 65%; max-width: 140px; opacity: .2; pointer-events: none; }
 .photo-label { position: relative; z-index: 2; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.9); line-height: 1; }
 .photo-num { position: absolute; top: 10px; right: 12px; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 42px; line-height: 1; color: rgba(255,255,255,.1); pointer-events: none; z-index: 1; }
@@ -121,10 +112,11 @@ nav { padding: 0 48px; display: flex; align-items: stretch; justify-content: spa
 .section-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 11px; letter-spacing: .1em; color: rgba(18,18,18,.2); }
 
 /* FILTER TABS */
-.filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
-.filter-btn { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; padding: 10px 18px; border: var(--border2); background: var(--white); color: rgba(18,18,18,.5); cursor: pointer; transition: background .15s, color .15s, box-shadow .15s; border-radius: 0; }
+.filter-tabs { display: flex; gap: 0; flex-wrap: nowrap; margin-bottom: 32px; border: var(--border); width: fit-content; }
+.filter-btn { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; padding: 10px 20px; border: none; border-right: var(--border2); background: var(--white); color: rgba(18,18,18,.5); cursor: pointer; transition: background .15s, color .15s; }
+.filter-btn:last-child { border-right: none; }
 .filter-btn:hover { background: var(--muted); color: var(--ink); }
-.filter-btn.active { background: var(--ink); color: var(--white); border-color: var(--ink); box-shadow: 3px 3px 0 0 var(--red); }
+.filter-btn.active { background: var(--red); color: var(--white); }
 
 /* WORK GRID */
 .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 80px; border-top: var(--border); border-left: var(--border); }
@@ -180,7 +172,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 .footer-shapes { display: flex; gap: 5px; align-items: center; }
 .footer-shapes .fc { width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
 .footer-shapes .fs { width: 10px; height: 10px; background: var(--yellow); }
-.footer-shapes .ft { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 10px solid var(--green); }
+.footer-shapes .ft { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 10px solid var(--blue); }
 .footer-copy { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.3); font-weight: 500; }
 
 /* ANIMATIONS */
@@ -197,6 +189,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
   .stats { grid-template-columns: repeat(2,1fr); }
 }
 @media(max-width:640px) {
+  nav { padding: 0 20px; }
   .hero-left { padding: 48px 20px; }
   .work-grid { grid-template-columns: 1fr; }
   .card.wide { grid-column: span 1; display: block; }
@@ -206,7 +199,8 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
   footer { padding: 24px 20px; }
   .contact-row { flex-direction: column; }
   .contact-item { border-right: none; border-bottom: var(--border); }
-  .content-area { padding: 0 20px !important; }
+  .filter-tabs { flex-wrap: wrap; width: 100%; }
+  .filter-btn { border-right: var(--border2); border-bottom: var(--border2); }
 }
 
 /* BLOG */
@@ -220,17 +214,15 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 .blog-title em { font-style: italic; color: var(--blue); text-transform: none; }
 .blog-meta { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(18,18,18,.5); display: flex; gap: 20px; flex-wrap: wrap; font-weight: 700; }
 .blog-screenshot-wrap { margin: 0 0 12px; display: flex; justify-content: center; }
-.blog-screenshot-wrap img { display: block; width: 100%; height: auto; border: var(--border); box-shadow: var(--shadow-md); }
+.blog-screenshot-wrap img { display: block; width: 100%; max-width: 560px; height: auto; border: var(--border); box-shadow: var(--shadow-md); }
 .blog-img-caption { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(18,18,18,.4); text-align: center; margin-bottom: 52px; font-weight: 700; }
-.blog-body { width: 100%; }
-.blog-body p { font-size: 14px; line-height: 1.9; color: #3a3733; margin-bottom: 24px; font-weight: 500; max-width: 720px; }
-.blog-body h2 { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -.02em; text-transform: uppercase; margin: 48px 0 16px; line-height: 1.1; border-left: 5px solid var(--red); padding-left: 16px; max-width: 720px; }
-.blog-body p { font-size: 14px; line-height: 1.9; color: #3a3733; margin-bottom: 28px; font-weight: 500; max-width: 720px; }
-.blog-body h2 { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -.02em; text-transform: uppercase; margin: 52px 0 20px; line-height: 1.1; border-left: 5px solid var(--red); padding-left: 16px; max-width: 720px; }
-.callout { background: var(--white); border: var(--border2); border-left: 5px solid var(--blue); padding: 20px 24px; margin: 28px 0; font-size: 13px; line-height: 1.8; color: #3a3733; font-weight: 500; }
+.blog-body { max-width: 680px; }
+.blog-body p { font-size: 14px; line-height: 1.9; color: #3a3733; margin-bottom: 24px; font-weight: 500; }
+.blog-body h2 { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: -.02em; text-transform: uppercase; margin: 48px 0 16px; line-height: 1.1; border-left: 5px solid var(--red); padding-left: 16px; }
+.callout { background: var(--white); border: var(--border2); border-left: 5px solid var(--blue); padding: 20px 24px; margin: 32px 0; font-size: 13px; line-height: 1.8; color: #3a3733; font-weight: 500; }
 .callout strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
 .callout code { font-family: 'Courier New', monospace; font-size: 12px; background: rgba(16,64,192,.08); padding: 1px 5px; }
-.learning-list { margin: 0 0 28px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.learning-list { margin: 0 0 24px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .learning-list li { font-size: 13px; line-height: 1.75; color: #3a3733; padding: 16px 20px; background: var(--white); border: var(--border2); display: flex; gap: 16px; align-items: flex-start; font-weight: 500; }
 .learning-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 12px; color: var(--white); background: var(--red); flex-shrink: 0; padding: 2px 7px; padding-top: 1px; }
 .learning-text strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
@@ -245,36 +237,10 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
 .blog-bottom-nav .back-link { color: var(--blue); cursor: pointer; transition: color .15s; display: flex; align-items: center; gap: 6px; font-weight: 900; }
 .blog-bottom-nav .back-link:hover { color: var(--red); }
 .blog-bottom-nav .back-link::before { content: '←'; }
-
-/* VIDEO PLACEHOLDER */
-.video-placeholder { width: 100%; aspect-ratio: 16/9; background: var(--ink); border: var(--border); box-shadow: var(--shadow-md); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; margin: 0 0 12px; position: relative; overflow: hidden; }
-.video-placeholder::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.02) 20px, rgba(255,255,255,.02) 21px); }
-.video-play-btn { width: 72px; height: 72px; border: 3px solid var(--yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
-.video-play-btn::after { content: ''; border-left: 24px solid var(--yellow); border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 4px; }
-.video-placeholder-label { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.4); position: relative; z-index: 1; }
-.video-placeholder-sub { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.25); position: relative; z-index: 1; border: 1px dashed rgba(255,255,255,.2); padding: 4px 12px; font-weight: 500; }
 </style>
-<script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-  var pg = document.getElementById(id);
-  if (pg) { pg.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-}
-function goHome() { showPage('page-home'); }
-function showBlog(slug) { showPage('page-blog-' + slug); }
-function scrollToSection(id) {
-  showPage('page-home');
-  requestAnimationFrame(function() {
-    requestAnimationFrame(function() {
-      var el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-}
-</script>
 </head>
 <body>
-<body>
+<div class="cursor" id="cursor"></div>
 
 <!-- NAV -->
 <div class="nav-wrap">
@@ -313,9 +279,8 @@ function scrollToSection(id) {
     </div>
     <h1 class="hero-headline anim-in" style="animation-delay:.2s">
       I turn<br>
-      <span class="line-accent">MESSY</span><br>
-      problems into<br>
-      <em class="line-italic">products</em>
+      <span class="line-accent">messy</span><br>
+      problems<br>
       <em class="line-italic">that ship.</em>
     </h1>
     <p class="hero-body anim-in" style="animation-delay:.32s">
@@ -335,24 +300,28 @@ function scrollToSection(id) {
     </div>
     <div class="photo-cards anim-in" style="animation-delay:.5s">
       <div class="photo-card">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDAwIDIwMCI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiMwZjBhMWEiLz4KICA8IS0tIGxhcmdlIGJhY2tncm91bmQgY2lyY2xlIC0tPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9Ijk1IiByPSIxMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDQiIHN0cm9rZS13aWR0aD0iNDAiLz4KICA8IS0tIGxpZ2h0YnVsYiBib2R5IC0tPgogIDxwYXRoIGQ9Ik0yMDAgMzAgQzE3MCAzMCAxNDggNTIgMTQ4IDgyIEMxNDggMTAyIDE1OCAxMTggMTcyIDEyOCBMMTcyIDE0OCBMMjI4IDE0OCBMMjI4IDEyOCBDMjQyIDExOCAyNTIgMTAyIDI1MiA4MiBDMjUyIDUyIDIzMCAzMCAyMDAgMzBaIiBmaWxsPSJub25lIiBzdHJva2U9IiNGMEMwMjAiIHN0cm9rZS13aWR0aD0iNCIvPgogIDwhLS0gYnVsYiBmaWxsIGdsb3cgLS0+CiAgPHBhdGggZD0iTTIwMCAzOCBDMTc0IDM4IDE1NiA1NyAxNTYgODIgQzE1NiAxMDAgMTY1IDExNCAxNzggMTIzIEwxNzggMTQyIEwyMjIgMTQyIEwyMjIgMTIzIEMyMzUgMTE0IDI0NCAxMDAgMjQ0IDgyIEMyNDQgNTcgMjI2IDM4IDIwMCAzOFoiIGZpbGw9IiNGMEMwMjAiIGZpbGwtb3BhY2l0eT0iMC4xMiIvPgogIDwhLS0gYmFzZSBsaW5lcyAtLT4KICA8cmVjdCB4PSIxNzgiIHk9IjE1MCIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjYiIGZpbGw9IiNGMEMwMjAiIHJ4PSIwIi8+CiAgPHJlY3QgeD0iMTgzIiB5PSIxNjAiIHdpZHRoPSIzNCIgaGVpZ2h0PSI2IiBmaWxsPSIjRjBDMDIwIiBvcGFjaXR5PSIwLjYiIHJ4PSIwIi8+CiAgPHJlY3QgeD0iMTg5IiB5PSIxNzAiIHdpZHRoPSIyMiIgaGVpZ2h0PSI1IiBmaWxsPSIjRjBDMDIwIiBvcGFjaXR5PSIwLjM1IiByeD0iMCIvPgogIDwhLS0gZmlsYW1lbnQgY3Jvc3MgLS0+CiAgPGxpbmUgeDE9IjIwMCIgeTE9IjYwIiB4Mj0iMjAwIiB5Mj0iMTE1IiBzdHJva2U9IiNGMEMwMjAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW9wYWNpdHk9IjAuNSIvPgogIDxsaW5lIHgxPSIxNzYiIHkxPSI4OCIgeDI9IjIyNCIgeTI9Ijg4IiBzdHJva2U9IiNGMEMwMjAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLW9wYWNpdHk9IjAuNSIvPgogIDwhLS0gZG90IGFjY2VudCAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSI4OCIgcj0iNiIgZmlsbD0iI0YwQzAyMCIvPgogIDwhLS0gbGFiZWwgLS0+CiAgPHRleHQgeD0iMjAwIiB5PSIxOTMiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iOCIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4zIiBsZXR0ZXItc3BhY2luZz0iNCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UFJPRFVDVDwvdGV4dD4KPC9zdmc+" alt="Product" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.75;">
         <div class="photo-card-inner">
-
+          <span class="photo-num">01</span>
+          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
           <div class="photo-label">Product</div>
+          <div class="photo-hint">→ add photo</div>
         </div>
       </div>
       <div class="photo-card">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNDEyIiB2aWV3Qm94PSIwIDAgMjAwIDQxMiI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSI0MTIiIGZpbGw9IiMwYTBhMWYiLz4KICA8IS0tIGNvbXBhc3Mgcm9zZSBiYWNrZ3JvdW5kIHJpbmcgLS0+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTkwIiByPSI5MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTA0MEMwIiBzdHJva2Utb3BhY2l0eT0iMC4xMiIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTkwIiByPSI3MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTA0MEMwIiBzdHJva2Utb3BhY2l0eT0iMC4xIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8IS0tIGNvbXBhc3MgY2FyZGluYWwgcG9pbnRzIC0tPgogIDwhLS0gTm9ydGggYXJyb3cgLSBzb2xpZCAtLT4KICA8cG9seWdvbiBwb2ludHM9IjEwMCwxMDAgMTA3LDE3NSAxMDAsMTY1IDkzLDE3NSIgZmlsbD0iI0QwMjAyMCIvPgogIDwhLS0gU291dGggYXJyb3cgLSBvdXRsaW5lIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iMTAwLDI4MCAxMDcsMjA1IDEwMCwyMTUgOTMsMjA1IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIEVhc3QgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxOTAsMTkwIDExNSwxODMgMTI1LDE5MCAxMTUsMTk3IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIFdlc3QgLS0+CiAgPHBvbHlnb24gcG9pbnRzPSIxMCwxOTAgODUsMTgzIDc1LDE5MCA4NSwxOTciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMjUiIHN0cm9rZS13aWR0aD0iMiIvPgogIDwhLS0gZGlhZ29uYWwgdGlja3MgLS0+CiAgPGxpbmUgeDE9IjEzNyIgeTE9IjEyNyIgeDI9IjEyOSIgeTI9IjEzNSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4xNSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8bGluZSB4MT0iMTM3IiB5MT0iMjUzIiB4Mj0iMTI5IiB5Mj0iMjQ1IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxsaW5lIHgxPSI2MyIgeTE9IjEyNyIgeDI9IjcxIiB5Mj0iMTM1IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxsaW5lIHgxPSI2MyIgeTE9IjI1MyIgeDI9IjcxIiB5Mj0iMjQ1IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDwhLS0gY2VudGVyIGRvdCAtLT4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxOTAiIHI9IjgiIGZpbGw9IiMxMDQwQzAiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxOTAiIHI9IjMiIGZpbGw9IiNmZmZmZmYiLz4KICA8IS0tIE4gbGFiZWwgLS0+CiAgPHRleHQgeD0iMTAwIiB5PSI5NSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxMSIgZmlsbD0iI0QwMjAyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIxIj5OPC90ZXh0PgogIDwhLS0gdG9wIGxhYmVsIC0tPgogIDx0ZXh0IHg9IjEwMCIgeT0iMzgiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iOCIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4zIiBsZXR0ZXItc3BhY2luZz0iNCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+U1RSQVRFR1k8L3RleHQ+CiAgPCEtLSBib3R0b20gc3RhdCAtLT4KICA8bGluZSB4MT0iMjAiIHkxPSIzMzAiIHgyPSIxODAiIHkyPSIzMzAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDgiIHN0cm9rZS13aWR0aD0iMSIvPgogIDx0ZXh0IHg9IjEwMCIgeT0iMzU4IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjI4IiBmaWxsPSIjMTA0MEMwIiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MzYwwrA8L3RleHQ+CiAgPHRleHQgeD0iMTAwIiB5PSIzNzgiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNyIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4zIiBsZXR0ZXItc3BhY2luZz0iMyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TUFSS0VUIFZJRVc8L3RleHQ+CiAgPHRleHQgeD0iMTAwIiB5PSI0MDAiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNyIgZmlsbD0iI2ZmZmZmZiIgb3BhY2l0eT0iMC4yIiBsZXR0ZXItc3BhY2luZz0iMiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+R1RNIMK3IFBJTE9UUyDCtyBDSEFOTkVMUzwvdGV4dD4KPC9zdmc+" alt="Strategy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.7;">
         <div class="photo-card-inner">
-
+          <span class="photo-num">02</span>
+          <span class="photo-star">✦</span>
+          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
           <div class="photo-label">Strategy</div>
+          <div class="photo-hint">→ add photo</div>
         </div>
       </div>
       <div class="photo-card">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDAwIDIwMCI+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiMwNTBkMGYiLz4KICA8IS0tIG91dGVyIGdsb3cgcmluZyAtLT4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSI5NSIgcj0iNzUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMDgiIHN0cm9rZS13aWR0aD0iMjAiLz4KICA8IS0tIHJvYm90IGhlYWQgb3V0bGluZSAtLT4KICA8cmVjdCB4PSIxNTIiIHk9IjM4IiB3aWR0aD0iOTYiIGhlaWdodD0iODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPCEtLSBhbnRlbm5hIC0tPgogIDxsaW5lIHgxPSIyMDAiIHkxPSIzOCIgeDI9IjIwMCIgeTI9IjIyIiBzdHJva2U9IiNEMDIwMjAiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjE4IiByPSI2IiBmaWxsPSIjRDAyMDIwIi8+CiAgPCEtLSBleWVzIC0tPgogIDxyZWN0IHg9IjE2NyIgeT0iNTYiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxNiIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC44NSIvPgogIDxyZWN0IHg9IjIxMSIgeT0iNTYiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxNiIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC44NSIvPgogIDwhLS0gZXllIHNoaW5lIC0tPgogIDxyZWN0IHg9IjE3MCIgeT0iNTkiIHdpZHRoPSI2IiBoZWlnaHQ9IjUiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNiIvPgogIDxyZWN0IHg9IjIxNCIgeT0iNTkiIHdpZHRoPSI2IiBoZWlnaHQ9IjUiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNiIvPgogIDwhLS0gbW91dGggLyBncmlsbCBsaW5lcyAtLT4KICA8bGluZSB4MT0iMTcwIiB5MT0iOTAiIHgyPSIyMzAiIHkyPSI5MCIgc3Ryb2tlPSIjRDAyMDIwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1vcGFjaXR5PSIwLjciLz4KICA8bGluZSB4MT0iMTc1IiB5MT0iOTgiIHgyPSIyMjUiIHkyPSI5OCIgc3Ryb2tlPSIjRDAyMDIwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1vcGFjaXR5PSIwLjQ1Ii8+CiAgPGxpbmUgeDE9IjE4MCIgeTE9IjEwNiIgeDI9IjIyMCIgeTI9IjEwNiIgc3Ryb2tlPSIjRDAyMDIwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1vcGFjaXR5PSIwLjI1Ii8+CiAgPCEtLSBuZWNrIC0tPgogIDxyZWN0IHg9IjE4OCIgeT0iMTE4IiB3aWR0aD0iMjQiIGhlaWdodD0iMTAiIGZpbGw9IiNEMDIwMjAiIG9wYWNpdHk9IjAuNSIvPgogIDwhLS0gc2hvdWxkZXJzIC8gYmFzZSAtLT4KICA8cmVjdCB4PSIxNTIiIHk9IjEyOCIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjgiIGZpbGw9IiNEMDIwMjAiIG9wYWNpdHk9IjAuMyIvPgogIDwhLS0gY2lyY3VpdCB0cmFjZXMgbGVmdCAtLT4KICA8cG9seWxpbmUgcG9pbnRzPSIxNTIsNzAgMTMyLDcwIDEzMiw5MCAxMTgsOTAiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIwLjQiLz4KICA8Y2lyY2xlIGN4PSIxMTgiIGN5PSI5MCIgcj0iNCIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC41Ii8+CiAgPHBvbHlsaW5lIHBvaW50cz0iMTUyLDkwIDEzNiw5MCAxMzYsMTEwIDEyMCwxMTAiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIwLjI1Ii8+CiAgPGNpcmNsZSBjeD0iMTIwIiBjeT0iMTEwIiByPSIzIiBmaWxsPSIjRDAyMDIwIiBvcGFjaXR5PSIwLjM1Ii8+CiAgPCEtLSBjaXJjdWl0IHRyYWNlcyByaWdodCAtLT4KICA8cG9seWxpbmUgcG9pbnRzPSIyNDgsNzAgMjY4LDcwIDI2OCw5MCAyODIsOTAiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIwLjQiLz4KICA8Y2lyY2xlIGN4PSIyODIiIGN5PSI5MCIgcj0iNCIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC41Ii8+CiAgPHBvbHlsaW5lIHBvaW50cz0iMjQ4LDkwIDI2NCw5MCAyNjQsMTEwIDI4MCwxMTAiIHN0cm9rZT0iI0QwMjAyMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1vcGFjaXR5PSIwLjI1Ii8+CiAgPGNpcmNsZSBjeD0iMjgwIiBjeT0iMTEwIiByPSIzIiBmaWxsPSIjRDAyMDIwIiBvcGFjaXR5PSIwLjM1Ii8+CiAgPCEtLSBsYWJlbCAtLT4KICA8dGV4dCB4PSIyMDAiIHk9IjE3NSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSI4IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjMiIGxldHRlci1zcGFjaW5nPSI0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BSSDCtyBGSVJTVDwvdGV4dD4KICA8IS0tIHNtYWxsIGJpbmFyeSBkZWNvcmF0aW9uIC0tPgogIDx0ZXh0IHg9IjIwIiB5PSIzMCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSI3IiBmaWxsPSIjRDAyMDIwIiBvcGFjaXR5PSIwLjIiPjAxMDAxMTAwIDAxMDAxMTAwIDAxMDAxMTAxPC90ZXh0PgogIDx0ZXh0IHg9IjIwIiB5PSIxODUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iNyIgZmlsbD0iI0QwMjAyMCIgb3BhY2l0eT0iMC4xNSI+MTAxMTAxMDAgMTEwMDEwMTAgMDAxMTAxMDE8L3RleHQ+Cjwvc3ZnPg==" alt="AI-first" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.7;">
         <div class="photo-card-inner">
-
+          <span class="photo-num">03</span>
+          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
           <div class="photo-label">AI-first</div>
+          <div class="photo-hint">→ add photo</div>
         </div>
       </div>
     </div>
@@ -360,10 +329,10 @@ function scrollToSection(id) {
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="stat-num">$12M</div><div class="stat-label">Revenue secured via AI-based SaaS proposed</div></div>
+  <div class="stat"><div class="stat-num">$12M</div><div class="stat-label">Revenue secured via AI product concepts</div></div>
   <div class="stat"><div class="stat-num">73%</div><div class="stat-label">Faster turnaround on financial ops</div></div>
   <div class="stat"><div class="stat-num">90%</div><div class="stat-label">Manual content work automated away</div></div>
-  <div class="stat"><div class="stat-num">2</div><div class="stat-label">AI-first apps shipped from scratch</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">AI-first products built from scratch</div></div>
 </div>
 
 <div class="content-area" style="padding: 0 48px; max-width:1400px; margin:0 auto;">
@@ -382,45 +351,75 @@ function scrollToSection(id) {
   </div>
 
   <div class="work-grid" id="work-grid">
-    <div class="card blue-accent" data-cat="apps" onclick="showBlog('bubble')">
+    <div class="card wide blue-accent" data-cat="apps" onclick="showBlog('bubble')">
       <div class="card-corner"></div>
-      <div class="card-tag"><span class="dot dot-blue"></span>Side Project · Shipped</div>
-      <div class="card-title">Bubble Bloom</div>
-      <div class="card-body">A browser mindfulness app where you pop 36 iridescent bubbles to reveal a hidden painting. ASMR sound design, zero dependencies, one 95KB file. Built for 2–3 minute desk breaks.</div>
-      <span class="card-metric">Vibe Coded</span><span class="card-metric">Web Audio API</span><span class="card-metric">Canvas 2D</span>
-      <div class="card-read-more">Read the build story</div>
+      <div>
+        <div class="card-tag"><span class="dot dot-blue"></span>Side Project · Shipped</div>
+        <div class="card-title">Bubble Bloom</div>
+        <div class="card-body">A browser mindfulness app where you pop 36 iridescent bubbles to reveal a hidden painting. ASMR sound design, zero dependencies, one 95KB file. Built for 2–3 minute desk breaks.</div>
+        <span class="card-metric">Vibe Coded</span><span class="card-metric">Web Audio API</span><span class="card-metric">Canvas 2D</span>
+        <div class="card-read-more">Read the build story</div>
+      </div>
+      <div class="card-right">
+        <div class="card-feature"><strong>Zero dependencies</strong>Every pixel drawn programmatically — no assets, no npm. Ships as a single file.</div>
+        <div class="card-feature"><strong>4-layer sound design</strong>Live synthesised via Web Audio API. Volume rises as you pop more bubbles.</div>
+        <div class="card-feature"><strong>16 procedural artworks</strong>Starry Night, The Great Wave — generated at runtime from math and bezier curves.</div>
+        <div class="card-feature"><strong>Designed for the overlooked</strong>No timer, no score, no failure state. Built for neurodivergent users and anyone who needs 3 minutes back.</div>
+      </div>
     </div>
 
     <div class="card red-accent" data-cat="apps" onclick="showBlog('murder')">
       <div class="card-corner"></div>
       <div class="card-tag"><span class="dot dot-red"></span>Side Project · Shipped</div>
-      <div class="card-title">Whodunnit</div>
+      <div class="card-title">Whodunit</div>
       <div class="card-body">A fully AI-generated murder mystery game where tone, setting, and difficulty unlock a unique case every time. Eight screens, procedural suspects, a locked killer reveal.</div>
       <span class="card-metric">AI-generated</span><span class="card-metric">Noir UI</span>
       <div class="card-read-more">Read the build story</div>
     </div>
 
-    <div class="card yellow-accent" data-cat="automation">
+    <!-- AUTOMATION: AI Resume Evaluator -->
+    <div class="card yellow-accent" data-cat="automation" onclick="showBlog('resume')">
       <div class="card-corner"></div>
-      <div class="card-tag"><span class="dot dot-yellow"></span>Personal Project · Shipped</div>
-      <div class="card-title">Daily AI News Digest</div>
-      <div class="card-body">Automated 90% of manual tracking — filters, summarises, and formats AI-specific news daily, cutting signal-to-noise ratio across sources.</div>
-      <span class="card-metric">90% automated</span><span class="card-metric">LLM pipelines</span>
+      <div class="card-tag"><span class="dot dot-yellow"></span>Personal Project · Built</div>
+      <div class="card-title">AI Resume Evaluator</div>
+      <div class="card-body">Automated candidate screening system with semantic skill-cluster scoring, cosine similarity matching, bias detection, and Top-5 shortlist automation. 1,000+ resumes/day at zero API cost.</div>
+      <span class="card-metric">1000+ resumes/day</span><span class="card-metric">Zero API cost</span><span class="card-metric">n8n · Gemini</span>
+      <div class="card-read-more">Read the build story</div>
+    </div>
+
+    <!-- AUTOMATION: Healthcare Billing AI -->
+    <div class="card red-accent" data-cat="automation" onclick="showBlog('billing')">
+      <div class="card-corner"></div>
+      <div class="card-tag"><span class="dot dot-red"></span>Personal Project · Built</div>
+      <div class="card-title">Healthcare Billing AI</div>
+      <div class="card-body">End-to-end claims automation pipeline: AI extraction of ICD/CPT codes, 3-stage Gemini compliance review, 100-point denial risk scoring, and smart routing — 90 seconds per claim, zero manual review for clean submissions.</div>
+      <span class="card-metric">90s per claim</span><span class="card-metric">73% faster ops</span><span class="card-metric">n8n · Gemini</span>
+      <div class="card-read-more">Read the build story</div>
+    </div>
+
+    <!-- AUTOMATION: Personal Cookbook -->
+    <div class="card blue-accent" data-cat="automation" onclick="showBlog('cookbook')">
+      <div class="card-corner"></div>
+      <div class="card-tag"><span class="dot dot-blue"></span>Personal Project · Built</div>
+      <div class="card-title">Personal Cookbook Engine</div>
+      <div class="card-body">One keyword in. A structured recipe out. Pulls the top YouTube cooking videos, filters by view count, extracts transcripts, runs two LLM passes for structure and formatting, and appends to a personal Google Docs cookbook — 30 seconds, zero manual steps.</div>
+      <span class="card-metric">30s end-to-end</span><span class="card-metric">Zero manual steps</span><span class="card-metric">n8n · YouTube API</span>
+      <div class="card-read-more">Read the build story</div>
     </div>
 
     <div class="card" data-cat="work" style="border-left:5px solid var(--ink);">
       <div class="card-corner"></div>
       <div class="card-tag"><span class="dot dot-ink"></span>Cognizant · Product Strategy</div>
-      <div class="card-title">AI-Native Products Pitched</div>
-      <div class="card-body">~$12M revenue secured by driving AI initiatives for BFSI and Retail clients — developed scope, business cases, and benchmarking frameworks, increasing proposal win rate by ~7%.</div>
-      <span class="card-metric">$12M secured</span><span class="card-metric">AI-Native SaaS</span>
+      <div class="card-title">$12M AI Product Pitch</div>
+      <div class="card-body">Translated abstract client pain points into structured AI product concepts with clear ROI narratives. Fluent in both boardroom and backend.</div>
+      <span class="card-metric">$12M secured</span><span class="card-metric">AI product design</span>
     </div>
 
     <div class="card red-accent" data-cat="work">
       <div class="card-corner"></div>
       <div class="card-tag"><span class="dot dot-red"></span>Diwas by Manyavar · GTM</div>
-      <div class="card-title">0→1 Retail GTM Strategy</div>
-      <div class="card-body">Led the market penetration, pilot, & GTM strategy for a new product line, Diwas, targeting Tier-2/3 markets and e-commerce marketplaces.</div>
+      <div class="card-title">0→1 GTM Strategy</div>
+      <div class="card-body">Mapped fragmented user journeys across online marketplaces and Tier 2/3 physical stores. Defined positioning, pricing, and channel mix for a brand launch from scratch.</div>
       <span class="card-metric">Pricing strategy</span><span class="card-metric">Channel mapping</span>
     </div>
 
@@ -453,12 +452,12 @@ function scrollToSection(id) {
     <div class="section-line"></div>
     <div class="section-num">03</div>
   </div>
- <div class="contact-row" style="margin-bottom:64px;">
-    <a href="mailto:s.vatsa2015@gmail.com" class="contact-item">
+  <div class="contact-row" style="margin-bottom:64px;">
+    <a href="mailto:saumya.vatsa@email.com" class="contact-item">
       <div class="contact-icon">✉</div>
       <div class="contact-detail">
         <div class="contact-label">Email</div>
-        <div class="contact-value">s.vatsa2015@gmail.com</div>
+        <div class="contact-value">saumya.vatsa@email.com</div>
       </div>
     </a>
     <a href="https://www.linkedin.com/in/saumya-vatsa-ximb/" target="_blank" class="contact-item">
@@ -482,6 +481,7 @@ function scrollToSection(id) {
 
 </div><!-- /page-home -->
 
+
 <!-- BLOG: BUBBLE BLOOM -->
 <div id="page-blog-bubble" class="page">
 <div class="container">
@@ -493,20 +493,6 @@ function scrollToSection(id) {
   </header>
 
   <div class="blog-body">
-
-    <a href="https://youtu.be/RfZCsKoOcbc" target="_blank" rel="noopener"
-       style="display:block;position:relative;width:100%;aspect-ratio:16/9;margin:0 0 12px;border:4px solid #121212;box-shadow:6px 6px 0 0 #121212;overflow:hidden;text-decoration:none;background:#000;">
-      <img src="https://img.youtube.com/vi/RfZCsKoOcbc/maxresdefault.jpg"
-           alt="Bubble Bloom App Demo"
-           style="width:100%;height:100%;object-fit:cover;opacity:0.85;display:block;">
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
-        <div style="width:72px;height:72px;border-radius:50%;background:rgba(208,32,32,0.9);display:flex;align-items:center;justify-content:center;box-shadow:4px 4px 0 0 #121212;">
-          <div style="width:0;height:0;border-top:14px solid transparent;border-bottom:14px solid transparent;border-left:24px solid #fff;margin-left:4px;"></div>
-        </div>
-        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(18,18,18,0.7);padding:4px 12px;">Watch on YouTube →</div>
-      </div>
-    </a>
-    <div class="blog-img-caption">App demo · Bubble Bloom</div>
 
     <div class="try-it">
       <div class="try-it-text">
@@ -528,12 +514,12 @@ function scrollToSection(id) {
 
     <ul class="learning-list">
       <li><span class="learning-num">01</span><span class="learning-text"><strong>Busy employees</strong> — need a 2-minute mental reset between meetings. The product must be openable, completable, and closeable within a calendar gap. No loading screens. No decisions.</span></li>
-      <li><span class="learning-num">02</span><span class="learning-text"><strong>Neurodivergent users</strong> (ADHD, sensory processing differences) — benefit from repetitive, low-stakes sensory input. The interaction pattern — tap to pop, one action, one reward — was designed specifically for this group, not as an afterthought.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Neurodivergent users</strong> (ADHD, autism, sensory processing differences) — benefit from repetitive, low-stakes sensory input. The interaction pattern — tap to pop, one action, one reward — was designed specifically for this group, not as an afterthought.</span></li>
       <li><span class="learning-num">03</span><span class="learning-text"><strong>Students</strong> — short decompression during study sessions or exam periods. Completion in under 3 minutes was a hard product constraint, not a nice-to-have.</span></li>
       <li><span class="learning-num">04</span><span class="learning-text"><strong>Caregivers</strong> (parents, nurses, social workers) — micro-recovery moments in high-demand schedules. Often on mobile, often interrupted. The product had to be resumable at any point without losing progress.</span></li>
       <li><span class="learning-num">05</span><span class="learning-text"><strong>People with anxiety</strong> — grounding through predictable, satisfying interaction. Predictability was a design principle: every pop behaves identically, every sound follows the same pattern.</span></li>
       <li><span class="learning-num">06</span><span class="learning-text"><strong>Insomniacs</strong> — a calming screen activity that isn't doom-scrolling. No algorithmic feed. No infinite scroll. A finite, completable loop with a clear endpoint.</span></li>
-
+      <li><span class="learning-num">07</span><span class="learning-text"><strong>Chronic pain sufferers</strong> — passive sensory engagement with no dexterity demands. Single tap or click only: no drag, no swipe, no precision required.</span></li>
     </ul>
 
     <p>Understanding these users before writing any spec shaped every subsequent decision — from the 30–60 bubble grid size (enough to feel satisfying, not so many it becomes a chore) to the decision to make audio purely optional with a persistent mute toggle.</p>
@@ -604,13 +590,14 @@ function scrollToSection(id) {
 </div>
 </div>
 
-<!-- BLOG: WHODUNNIT -->
+
+<!-- BLOG: WHODUNIT -->
 <div id="page-blog-murder" class="page">
 <div class="container">
   <div class="blog-back" onclick="goHome()">Back to portfolio</div>
   <header class="blog-header">
     <div class="blog-eyebrow">Product Case Study · Side Project</div>
-    <h1 class="blog-title">Building Whodunnit: what a murder mystery game taught me about AI product design, narrative coherence, and the PRD as a spec tool.</h1>
+    <h1 class="blog-title">Building Whodunit: what a murder mystery game taught me about AI product design, narrative coherence, and the PRD as a spec tool.</h1>
     <div class="blog-meta"><span>March 2026</span><span>10 min read</span><span>Product Management · AI Systems · Game Design · Lovable</span></div>
   </header>
 
@@ -621,12 +608,12 @@ function scrollToSection(id) {
         <strong>🔪 Try it — whodunit.lovable.app</strong>
         Pick a tone, setting, difficulty, and detective avatar. An AI generates your entire case — unique suspects, alibis, evidence, red herrings, and a pre-committed killer. No two mysteries are the same.
       </div>
-      <a href="https://whodunit.lovable.app" target="_blank" class="try-it-btn">Play Whodunnit →</a>
+      <a href="https://whodunit.lovable.app" target="_blank" class="try-it-btn">Play Whodunit →</a>
     </div>
 
-    <p>Most games lie to you about replayability. They shuffle the same deck. Whodunnit does something different: it generates the entire mystery from scratch every session — different victim, different killer, different motive, different evidence trail — driven entirely by the tone, setting, and difficulty you configure at the start. The AI is not filling in a template. It is writing a new case.</p>
+    <p>Most games lie to you about replayability. They shuffle the same deck. Whodunit does something different: it generates the entire mystery from scratch every session — different victim, different killer, different motive, different evidence trail — driven entirely by the tone, setting, and difficulty you configure at the start. The AI is not filling in a template. It is writing a new case.</p>
 
-    <p>What I want to document here isn't the build. It's the product thinking behind it — the decisions that shaped what Whodunnit is, what it isn't, and why those boundaries matter.</p>
+    <p>What I want to document here isn't the build. It's the product thinking behind it — the decisions that shaped what Whodunit is, what it isn't, and why those boundaries matter.</p>
 
     <h2>The problem I was actually solving</h2>
 
@@ -641,7 +628,7 @@ function scrollToSection(id) {
 
     <h2>The one constraint that defined everything</h2>
 
-    <p>The most important product decision in Whodunnit was not a feature. It was a constraint: the killer's identity is committed at generation time, not at reveal time.</p>
+    <p>The most important product decision in Whodunit was not a feature. It was a constraint: the killer's identity is committed at generation time, not at reveal time.</p>
 
     <p>This sounds obvious, but it has significant technical implications. The AI cannot retroactively assign a killer based on which suspects the player investigated most. The LLM must generate victim, suspects, evidence trail, red herrings, and alibi inconsistencies all pointing at a pre-determined person, in a single coherent generation call. The killer was always the same person. The evidence always pointed there. You were just finding it.</p>
 
@@ -660,7 +647,7 @@ function scrollToSection(id) {
 
     <h2>Eight screens, each with one job</h2>
 
-    <p>Whodunnit is an eight-screen investigation arc. What took the most spec work wasn't the screens that do the most — it was defining what each screen and only that screen is responsible for.</p>
+    <p>Whodunit is an eight-screen investigation arc. What took the most spec work wasn't the screens that do the most — it was defining what each screen and only that screen is responsible for.</p>
 
     <p>The briefing screen establishes the scene before introducing suspects. That ordering is deliberate: reading the crime before meeting the cast means the player approaches suspects with context rather than meeting them cold. The evidence board uses tiered unlocking — Tier 1 clues are available immediately, Tier 2 and 3 unlock as earlier evidence is examined. Players cannot skip to the most incriminating evidence. Investigation has structure.</p>
 
@@ -681,7 +668,7 @@ function scrollToSection(id) {
 
     <h2>What writing the PRD before building actually changed</h2>
 
-    <p>I wrote a complete PRD before opening Lovable. I've written about why I do this with Bubble Bloom — but Whodunnit pushed it further, because the domain (AI-generated game narrative) has higher stakes for specification failures. Vague intentions in a relaxation app produce mediocre outputs. Vague intentions in a mystery game produce an AI that contradicts itself halfway through a case.</p>
+    <p>I wrote a complete PRD before opening Lovable. I've written about why I do this with Bubble Bloom — but Whodunit pushed it further, because the domain (AI-generated game narrative) has higher stakes for specification failures. Vague intentions in a relaxation app produce mediocre outputs. Vague intentions in a mystery game produce an AI that contradicts itself halfway through a case.</p>
 
     <ul class="learning-list">
       <li><span class="learning-num">01</span><span class="learning-text"><strong>The PRD is the prompt</strong> — Every screen described in precise detail in the PRD became a reliable generation prompt with minimal revision. Every screen described vaguely cost three to five revision cycles. "A screen where users examine clues" generates a generic interface. "A grid of evidence cards with atmospheric icons, tiered unlock based on examination progress, and a modal containing full clue text plus three investigative choices that produce AI-generated unique outcomes" generates what I actually wanted.</span></li>
@@ -701,15 +688,292 @@ function scrollToSection(id) {
 
   <div class="blog-bottom-nav">
     <span class="back-link" onclick="goHome()">Back to portfolio</span>
-    <span>Whodunnit · March 2026</span>
+    <span>Whodunit · March 2026</span>
   </div>
 </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.filter-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- BLOG: AI RESUME EVALUATOR                                       -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="page-blog-resume" class="page">
+<div class="container">
+  <div class="blog-back" onclick="goHome()">Back to portfolio</div>
+  <header class="blog-header">
+    <div class="blog-eyebrow">Automation Case Study · Personal Project</div>
+    <h1 class="blog-title">AI Resume Evaluator: how I built a zero-cost candidate screening system with semantic scoring, bias detection, and auto-shortlisting.</h1>
+    <div class="blog-meta"><span>May 2026</span><span>9 min read</span><span>Product Design · Workflow Automation · AI Systems · n8n</span></div>
+  </header>
+
+  <div class="blog-body">
+
+        <div class="try-it">
+      <div class="try-it-text">
+        <strong>⚙️ View the workflow — github.com/saumyavatsacreates</strong>
+        A fully importable n8n workflow JSON. 36 nodes. Drop in your JD, point it at a Drive folder, and it evaluates every resume automatically — scoring, ranking, emailing you the Top 5.
+      </div>
+      <a href="https://github.com/saumyavatsacreates" target="_blank" class="try-it-btn">View on GitHub →</a>
+    </div>
+
+    <p>I built this in n8n — a no-code workflow automation tool where you connect nodes visually, each node doing one thing, passing its output to the next. The workflow ended up at 36 nodes. What I want to document here is not what the system does, but the specific decisions I made at each stage of building it and why those decisions are visible in the node structure.</p>
+
+    <h2>It starts with a trigger, not a button</h2>
+
+    <p>The entry point is a Google Drive Trigger node that watches a folder called Resumes every minute. The moment a new PDF lands there, the workflow fires. There is no button to press, no form to submit, no human in the loop at the intake stage. The trigger node is the product decision: hiring pipelines that require manual action at every step lose speed and consistency. If the intake is automatic, everything downstream can be automatic too.</p>
+
+    <p>A second trigger — a Form Trigger node — creates a public-facing URL where candidates can self-submit. Name, email, PDF upload. Both triggers feed into the same pipeline through a deduplication gate: a Code node that checks whether the filename already exists in Baserow before proceeding. Running the same resume twice produces the same row, not a duplicate.</p>
+
+    <div class="callout">
+      <strong>The first n8n lesson: every node is a product decision</strong>
+      In code, decisions hide inside functions and conditionals. In n8n, every decision is a visible node on the canvas. The deduplication check is a node. The rate limiter is a node. The wait timer between API calls is a node. This forces you to name every decision and make it explicit — which is exactly what a PRD does on paper.
+    </div>
+
+    <h2>Two parallel paths: caching the JD, processing the resume</h2>
+
+    <p>The first major architectural decision in the workflow is separating JD processing from resume processing. The JD changes rarely — maybe once per hiring cycle. The resumes change constantly. So there is a Cache JD Text node that stores the JD in n8n's static workflow data after the first extraction. Every subsequent resume run skips the JD extraction entirely and reads from cache. This is why the workflow stays fast and cheap even at volume: the expensive JD processing happens once.</p>
+
+    <p>When the JD does change, a second branch fires: a Code node called JD Change Reset that clears the leaderboard, the insight counters, and the cluster scores — so every resume gets re-evaluated against the new JD cleanly. JD change is not a manual operation. It is a handled event.</p>
+
+    <h2>The scoring node: rule-based first, AI second</h2>
+
+    <p>The node I spent the most time on is the Build Prompt v2 Code node. It is 180 lines of JavaScript that does two completely separate things. The first half is deterministic: it computes keyword overlap, cosine similarity between JD and resume skill cluster vectors, and a resume quality score based on impact verbs and metric patterns. These numbers are final before the AI is ever called. The second half constructs a prompt that passes those pre-computed scores to Gemini and asks it only for qualitative explanation — strengths, gaps, career trajectory, education fit.</p>
+
+    <p>The separation is enforced structurally. Gemini receives the numbers as fixed inputs. The JSON schema it must return has no field for overriding them. The AI layer genuinely cannot change the score — not because of a soft instruction, but because there is no field in the response schema for it to write to.</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>Keyword Score — 40 points, computed in the Code node</strong> The JD's top 30 non-stopword terms are extracted and checked against the resume text. Each hit contributes proportionally. This runs in under 5 milliseconds per resume — no API call, no cost.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Cluster Score — 30 points, computed via cosine similarity</strong> Eight skill clusters (ML/AI, Data, Backend, Frontend, Cloud/DevOps, Product/BA, Consulting, Finance) are defined as term lists. Both JD and resume are vectorised as term-frequency counts per cluster. Cosine similarity is computed between the two vectors. This is the node that catches candidates whose vocabulary differs from the JD but whose skill set matches — a data engineer who says "ETL in Airflow" when the JD says "data pipeline experience."</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>Quality Score — 15 points, computed via regex in the Code node</strong> Impact verbs (achieved, shipped, drove, scaled, reduced, led) and metric patterns (numbers followed by %, x, CR, lakh, users, ARR) are counted directly from the resume text. A resume full of "responsible for" language scores low. A resume with quantified outcomes scores high. This runs entirely in the Code node — no AI involved.</span></li>
+      <li><span class="learning-num">04</span><span class="learning-text"><strong>Education Score — 15 points, the only number Gemini produces</strong> This is the only score the AI contributes. It receives the degree, field, and certifications from the resume and scores their relevance to the JD on a 0–15 scale. Bootcamps in the right domain count. An MBA in an unrelated field counts less. This is bounded: 0 to 15, no exceptions.</span></li>
+    </ul>
+
+    <h2>The nodes that failed first</h2>
+
+    <p>Three nodes caused problems before the workflow ran cleanly.</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>The Flag Error Row node had two outputs — Sheets nodes cannot do that</strong> An early version of the error path wired the Flag Error Row (a Google Sheets node) to both the Audit Log and the Stop and Error node. Sheets nodes have one output. n8n silently ignored the second wire, leaving Stop and Error disconnected and invisible on the canvas. The fix was a linear chain: Flag Error Row feeds Write Audit Log, which feeds Stop and Error. One output per non-IF node.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Two node pairs were stacked on identical canvas coordinates</strong> The Hiring Insights Aggregator was positioned at the same x,y as the IF Score node. The JD Change Reset node was stacked on the Embed JD node. In n8n, overlapping nodes render as one — so 36 nodes appeared as 34. The fix was moving each pair apart in the JSON's position array. Nothing in the logic changed; only the coordinates.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>All custom node IDs were non-UUID format</strong> n8n requires node IDs to be valid UUIDs (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx). The initial build used readable slugs like embed_jd_skill_clusters. n8n silently dropped or merged nodes with invalid IDs on import. Regenerating all IDs with uuid.uuid4() fixed the import count from 34 to 36.</span></li>
+    </ul>
+
+    <h2>What the Top-5 Leaderboard Builder node does</h2>
+
+    <p>After every score, a Code node called Top-5 Leaderboard Builder reads the current leaderboard from n8n's static workflow data, upserts the current candidate by filename, sorts by score descending, and trims to five entries. If the current candidate is in the top five, it sets a flag. An IF node downstream reads that flag and triggers the Gmail SMTP email only when the leaderboard changes. No flag, no email. This means the recruiter receives exactly one email per leaderboard change — not one per resume scored.</p>
+
+    <div class="blog-tags">
+      <span class="tech-tag">n8n</span><span class="tech-tag">Workflow Automation</span><span class="tech-tag">Gemini 1.5 Flash</span><span class="tech-tag">Google Drive</span><span class="tech-tag">Baserow</span><span class="tech-tag">Cosine Similarity</span><span class="tech-tag">Skill Ontology</span><span class="tech-tag">Bias Detection</span><span class="tech-tag">SMTP Email</span><span class="tech-tag">Code Node</span>
+    </div>
+  </div>
+
+  <div class="blog-bottom-nav">
+    <span class="back-link" onclick="goHome()">Back to portfolio</span>
+    <span>AI Resume Evaluator · May 2026</span>
+  </div>
+</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- BLOG: HEALTHCARE BILLING AI                                     -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="page-blog-billing" class="page">
+<div class="container">
+  <div class="blog-back" onclick="goHome()">Back to portfolio</div>
+  <header class="blog-header">
+    <div class="blog-eyebrow">Automation Case Study · Personal Project</div>
+    <h1 class="blog-title">Healthcare Billing AI: designing a 3-stage claims automation pipeline that cuts denial risk, flags coding errors, and routes claims in 90 seconds.</h1>
+    <div class="blog-meta"><span>May 2026</span><span>10 min read</span><span>Product Design · Healthcare · Workflow Automation · AI Systems</span></div>
+  </header>
+
+  <div class="blog-body">
+
+        <div class="try-it">
+      <div class="try-it-text">
+        <strong>⚙️ View on GitHub — Healthcare Billing Automation</strong>
+        Full n8n workflow JSON, ROI analysis, and system architecture. 14 nodes. Includes the 3-stage Gemini pipeline, scoring engine, and switch-based routing logic.
+      </div>
+      <a href="https://github.com/saumyavatsacreates/Healthcare---Billing-Automation" target="_blank" class="try-it-btn">View on GitHub →</a>
+    </div>
+
+    <p>This workflow started as a single Gemini call that tried to do everything — extract codes, check compliance, estimate denial risk — in one prompt. It fell apart immediately. One large prompt trying to do three jobs produces outputs that are partially right in unpredictable ways. The fix was decomposition: three separate Gemini calls, each with a single clear responsibility, chained through parse nodes that carry structured data forward. That decision is the entire architecture of the workflow.</p>
+
+    <h2>The trigger and intake chain</h2>
+
+    <p>The workflow opens with a Google Drive Trigger node polling a Bills folder every minute. When a new file appears, a Download File node pulls the binary. The next three nodes solve a specific problem: Gemini needs plain text, but billing documents are PDFs — often generated by hospital billing systems, sometimes scanned. A Copy Bill to Google Doc node converts the file using Drive's native copy API. An Export Bill as Text node then calls Drive's export endpoint to pull the plain-text version. A Code node validates the extracted text has minimum length before anything expensive runs — a cheap gate that prevents empty or corrupt files from consuming three API calls downstream.</p>
+
+    <div class="callout">
+      <strong>Why Google Doc conversion instead of a PDF parser</strong>
+      Drive's native text export handles structured billing PDFs more reliably than a generic PDF-to-text library because billing documents often use complex table layouts that generic parsers misread. The conversion step adds one node and two API calls but produces clean, column-aligned text that the extraction prompt can parse accurately. Removing it saved 200ms and cost three times more in Gemini retries.
+    </div>
+
+    <h2>Three Gemini nodes, three jobs</h2>
+
+    <p>Each AI stage is an HTTP Request node calling Gemini 1.5 Flash, followed by a Code node that parses the JSON response and validates the output before passing it forward. The parse node is not optional — it is what makes the chain debuggable. When Stage 2's compliance check fails, the error is isolated to that parse node. The problem is visible, named, and locatable.</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>AI: Extract Billable Items — Stage 1</strong> The prompt asks Gemini to identify every medically and financially significant field in the bill: patient identifiers, dates of service, rendering provider NPI, ICD-10 diagnosis codes, CPT procedure codes with quantities and prices, total billed amount, insurance type, and facility classification. The output is a structured JSON object. The prompt explicitly says: do not evaluate, do not flag, do not score — only extract. Mixing extraction with evaluation in one prompt produces both less accurately.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>AI: Code Mapping and Compliance — Stage 2</strong> This node receives Stage 1's structured JSON and evaluates the codes. It looks for unbundling (two codes billed separately that should be one), upcoding (a higher-complexity code than the service warrants), duplicate line items, missing modifiers, and diagnosis-procedure pairing gaps. After this Gemini call, a Validation Layer Code node applies seven deterministic rule checks independently of the AI output — because some compliance rules should be exact, not probabilistic, and the AI should not be able to argue its way past them.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>AI: Denial Risk — Stage 3</strong> The third Gemini call receives both previous outputs and produces a denial probability estimate, a list of specific documentation gaps, recommended pre-submission actions, and an expected reimbursement range. This is the stage that converts a compliance check into an actionable brief. The billing executive does not receive a list of problems — they receive a list of things to do before the claim goes out.</span></li>
+    </ul>
+
+    <h2>The scoring engine node</h2>
+
+    <p>After all three AI stages, a Scoring Engine Code node combines the outputs into a 100-point composite: Code Accuracy (30 points from Stage 2), Validation (25 points from the rule engine), Denial Risk (25 points from Stage 3), and Documentation Completeness (20 points from Stage 3's gap count). The score determines which branch a Switch node takes: Auto-Submit above 80, Human Review between 60 and 79, Hold and Correct between 40 and 59, Reject below 40.</p>
+
+    <p>Each branch of the Switch node connects to a tailored Gmail node with a different subject, body, and recommended action. The Auto-Submit email says the claim is clean and has been queued. The Hold email names the specific codes that need correction and the documentation gaps that need filling. Same node type, four different outputs, each appropriate to the claim's actual state.</p>
+
+    <h2>What broke during the build</h2>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>The Switch node's branches were orphaned</strong> n8n's Switch node creates output branches dynamically. Early in the build, the four routing branches existed in the Switch node's configuration but the downstream Gmail nodes were not wired to them. The canvas showed the Switch node with four output handles and nothing connected. n8n does not error on unconnected outputs — it silently drops the data. Fixing this required clicking each output handle and drawing the wire manually.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Gemini API free-tier limits hit during testing</strong> After the first day of testing, Gemini's free-tier rate limit was exhausted mid-session. The HTTP Request node returned a 429 error that the parse node downstream could not handle — it expected a candidates array and received an error object. The fix was a Groq migration: updating the HTTP node URL to Groq's OpenAI-compatible endpoint (llama-3.3-70b-versatile) and updating the response parsing from candidates[0].content.parts[0].text to choices[0].message.content. One node URL change and one parse node update.</span></li>
+      <li><span class="learning-num">03</span><span class="learning-text"><strong>$json references broke in Run Once for All Items mode</strong> The Scoring Engine Code node was set to run once for all items, which changes how $json behaves — it becomes an array, not a single object. Several property lookups that worked in single-item mode silently returned undefined in batch mode. The fix was switching the node to run once per item, which restored standard $json behaviour throughout.</span></li>
+    </ul>
+
+    <h2>The Insights Generator node</h2>
+
+    <p>After every claim is processed, a Code node called Insights Generator updates running totals stored in n8n's static workflow data: total claims processed, average score, score distribution by tier, most common denial risk flags. These aggregate without a database — n8n's static data persists across workflow runs on the same instance. The limitation is that static data resets on redeploy. For anything beyond a few hundred claims, this needs a persistent store. The redesign blueprint in the GitHub document replaces this with BigQuery.</p>
+
+    <div class="blog-tags">
+      <span class="tech-tag">n8n</span><span class="tech-tag">Workflow Automation</span><span class="tech-tag">Gemini AI</span><span class="tech-tag">Groq</span><span class="tech-tag">Google Drive</span><span class="tech-tag">ICD-10</span><span class="tech-tag">CPT Coding</span><span class="tech-tag">Switch Node</span><span class="tech-tag">Claims Processing</span><span class="tech-tag">Revenue Cycle</span>
+    </div>
+  </div>
+
+  <div class="blog-bottom-nav">
+    <span class="back-link" onclick="goHome()">Back to portfolio</span>
+    <span>Healthcare Billing AI · May 2026</span>
+  </div>
+</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- BLOG: PERSONAL COOKBOOK ENGINE                                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div id="page-blog-cookbook" class="page">
+<div class="container">
+  <div class="blog-back" onclick="goHome()">Back to portfolio</div>
+  <header class="blog-header">
+    <div class="blog-eyebrow">Automation Case Study · Personal Project</div>
+    <h1 class="blog-title">Personal Cookbook Engine: one keyword in, a structured recipe out — how I automated the conversion of cooking videos into a searchable personal cookbook.</h1>
+    <div class="blog-meta"><span>May 2026</span><span>7 min read</span><span>Automation · Product Design · LLM Pipelines · n8n</span></div>
+  </header>
+
+  <div class="blog-body">
+
+        <div class="try-it">
+      <div class="try-it-text">
+        <strong>⚙️ View on GitHub — Personal Cookbook Automation</strong>
+        Full n8n workflow. 11 nodes. Enter a dish name, get a clean structured recipe appended to your Google Docs cookbook. 30 seconds. Zero manual steps.
+      </div>
+      <a href="https://github.com/saumyavatsacreates/Personal-Cookbook-Automation" target="_blank" class="try-it-btn">View on GitHub →</a>
+    </div>
+
+    <p>This is the smallest workflow I have built — 11 nodes — and the one that taught me the most about what a node actually is. Not a step. A decision made visible. Every node in this workflow exists because I made a specific product choice that needed to be represented somewhere in the chain. The 11 nodes are 11 decisions. Here is what they are and why I made them.</p>
+
+    <h2>Node 1 and 2: Manual Trigger and Set Keyword</h2>
+
+    <p>The workflow starts with a Manual Trigger node — you run it when you want a recipe, not on a schedule. The second node is a Set node that stores the search keyword as a named variable: keyword equals "paneer butter masala recipe." This is not a technical requirement. n8n would let you hardcode the keyword inside the HTTP Request node downstream. I put it in a Set node because variables that live in a dedicated node are visible, editable, and nameable without touching any other node in the chain. When you want to change what recipe you are looking for, you change one value in one node.</p>
+
+    <h2>Nodes 3 and 4: YouTube Search and Video ID Extraction</h2>
+
+    <p>Node 3 is an HTTP Request node calling the YouTube Data API v3 search endpoint with the keyword, returning the top 5 video results with their IDs, titles, and channel names. Node 4 is a Code node that extracts only the videoId field from each result and splits them into separate pipeline items — one item per video. This is the first time the pipeline fans out from one item to five.</p>
+
+    <p>The reason for a dedicated Code node here rather than using an expression in the next node is debuggability. When I click Node 4's output in the n8n editor, I can see exactly what five items are flowing forward and inspect each videoId. If the YouTube API returns a malformed response, the error surface is isolated to this node.</p>
+
+    <h2>Nodes 5 and 6: Statistics Fetch and Popularity Filter</h2>
+
+    <p>Node 5 is another HTTP Request node — this time calling the YouTube Videos API to fetch viewCount for each video ID. Node 6 is an IF node with one condition: viewCount greater than 100,000. Videos that fail this check are discarded. Only qualifying videos proceed.</p>
+
+    <div class="callout">
+      <strong>Why an IF node instead of an LLM call</strong>
+      The first version used an AI node to classify whether a video title suggested a reliable recipe. It was slower, more expensive, and less consistent than a number threshold. 100,000 views is a proxy for quality validated by audience behaviour at scale — a deterministic signal that costs nothing. When you can replace a probabilistic AI judgement with a deterministic rule, you should. The IF node is one of n8n's most underused tools for exactly this reason.
+    </div>
+
+    <h2>Nodes 7 and 8: Transcript Extraction and Parsing</h2>
+
+    <p>Node 7 is an HTTP Request node calling the RapidAPI YouTube Transcript API with the videoId. The response is an array of objects — each object has a text field containing a sentence or phrase from the video. This structure is what the API returns; it is not useful yet.</p>
+
+    <p>Node 8 is a Code node that joins all the text fields with a space into a single raw string. One input (array of objects), one output (single string). The entire node is three lines of JavaScript. It exists as a separate node because the LLM prompt in Node 9 expects a single string, and the transformation from array to string is a named, visible, testable step rather than an expression buried inside the prompt.</p>
+
+    <h2>Nodes 9 and 10: Two LLM calls, two jobs</h2>
+
+    <p>Both AI nodes call Gemini 1.5 Flash via HTTP Request. They are separate nodes with separate prompts and separate responsibilities.</p>
+
+    <ul class="learning-list">
+      <li><span class="learning-num">01</span><span class="learning-text"><strong>Node 9 — Recipe Generation</strong> The prompt receives the raw transcript string and asks Gemini to extract a structured recipe: ingredient list with quantities and units, ordered steps, serving size, prep time, cook time. The output must be a JSON object. The prompt says nothing about formatting — only extraction. Hindi cooking videos arrive as unpunctuated Hinglish with filler words and host asides. The prompt handles this by asking for ingredients and steps only, not a transcript summary.</span></li>
+      <li><span class="learning-num">02</span><span class="learning-text"><strong>Node 10 — Recipe Formatting</strong> The second prompt receives Node 9's structured JSON and asks Gemini to rewrite it as a clean, readable recipe in natural language: consistent terminology, numbered steps, ingredient quantities in standard units. It is not asked to re-extract anything. Keeping the two calls separate means formatting errors are isolated to Node 10 and extraction errors are isolated to Node 9. If the formatted recipe looks wrong, you check Node 10's input — if Node 9's output was clean, the formatting prompt needs work. If Node 9's output was already garbled, the extraction prompt needs work. Mixing them in one call makes this distinction impossible.</span></li>
+    </ul>
+
+    <h2>Node 11: Google Docs Append</h2>
+
+    <p>The final node is a Google Docs node that appends the formatted recipe to a named document. The document functions as a personal cookbook — every recipe runs add a new entry at the end. This is append-only, which is a deliberate scope decision: search, indexing, and cuisine categorisation were all considered and all cut. Each would have added a node, an API dependency, and a new failure surface. The core value is a recipe in a findable place. Everything else is v2.</p>
+
+    <h2>The one node I removed</h2>
+
+    <p>An early version of the workflow had a Telegram notification node at the end that sent a message when a recipe was added. It was the first thing I cut. It added a Telegram API credential, a new failure point, and a notification for something that already produced a visible artefact — the recipe in the doc. Notifications that confirm a thing you can already see are noise. The removal was a product decision, not a technical one: the pipeline's output is the doc. The doc is the notification.</p>
+
+    <div class="blog-tags">
+      <span class="tech-tag">n8n</span><span class="tech-tag">Workflow Automation</span><span class="tech-tag">YouTube Data API</span><span class="tech-tag">RapidAPI</span><span class="tech-tag">Gemini 1.5 Flash</span><span class="tech-tag">Google Docs</span><span class="tech-tag">LLM Pipelines</span><span class="tech-tag">IF Node</span><span class="tech-tag">Code Node</span><span class="tech-tag">Pipeline Design</span>
+    </div>
+  </div>
+
+  <div class="blog-bottom-nav">
+    <span class="back-link" onclick="goHome()">Back to portfolio</span>
+    <span>Personal Cookbook Engine · May 2026</span>
+  </div>
+</div>
+</div>
+
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const pg = document.getElementById(id);
+  if (pg) { pg.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+function goHome() { showPage('page-home'); }
+function showBlog(slug) { showPage('page-blog-' + slug); }
+
+// FIX: double requestAnimationFrame ensures the browser finishes painting
+// page-home (display:block) before scrollIntoView fires — replaces the
+// unreliable 80ms setTimeout that caused the scroll to silently fail.
+function scrollToSection(id) {
+  showPage('page-home');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+  document.querySelectorAll('.card, .filter-btn, .nav-brand, .photo-card, .blog-back, .back-link, .skill-pill, .try-it-btn, .contact-item, .btn').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+  });
+
+  // Filter tabs
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      var filter = btn.dataset.fil
+      const filter = btn.dataset.filter;
+      document.getElementById('work-grid').querySelectorAll('.card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.cat === filter) ? '' : 'none';
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>
