@@ -278,13 +278,12 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
       <span class="hero-eyebrow-text">Saumya Vatsa</span>
     </div>
     <h1 class="hero-headline anim-in" style="animation-delay:.2s">
-      I turn<br>
-      <span class="line-accent">messy</span><br>
-      problems<br>
-      <em class="line-italic">that ship.</em>
+      <span style="font-size:clamp(64px,7.5vw,116px); line-height:.9; display:block; letter-spacing:-.04em;">Saumya</span>
+      <span style="font-size:clamp(64px,7.5vw,116px); line-height:.9; display:block; letter-spacing:-.04em; color:var(--blue);">Vatsa</span>
+      <em class="line-italic" style="font-size:clamp(22px,2.4vw,38px); letter-spacing:-.01em; margin-top:18px; display:block; line-height:1.1;">AI-native. Product-minded.<br>Strategy-first.</em>
     </h1>
     <p class="hero-body anim-in" style="animation-delay:.32s">
-      MBA (Marketing, Systems) + CS background. I live in the overlap between product strategy, AI tooling, and "wait, why does this UX hurt so much?" — then fix it. From $12M client pitches to AI-generated murder mystery games, I build end-to-end and care about both the deck <em>and</em> the outcome.
+      MBA (Marketing + Systems) · BTech CS. I've shipped AI-powered apps from scratch, automated end-to-end ops pipelines, closed $12M in client pitches, and built GTM strategy for a brand launch from zero. Whether it's a murder mystery game with 125 organic users or a healthcare billing engine processing claims in 90 seconds, I work across the full stack of product thinking: define, build, measure, iterate.
     </p>
     <div class="hero-cta-row anim-in" style="animation-delay:.42s">
       <button class="btn btn-red" onclick="scrollToSection('section-projects')">View Projects →</button>
@@ -302,26 +301,77 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
       <div class="photo-card">
         <div class="photo-card-inner">
           <span class="photo-num">01</span>
-          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
-          <div class="photo-label">Product</div>
-          <div class="photo-hint">→ add photo</div>
+          <!-- AI graphic: neural network nodes -->
+          <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);width:72%;opacity:.55;" viewBox="0 0 140 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- connections -->
+            <line x1="24" y1="30" x2="70" y2="20" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <line x1="24" y1="60" x2="70" y2="20" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <line x1="24" y1="60" x2="70" y2="60" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <line x1="24" y1="90" x2="70" y2="60" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <line x1="24" y1="90" x2="70" y2="100" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <line x1="70" y1="20" x2="116" y2="40" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <line x1="70" y1="60" x2="116" y2="40" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <line x1="70" y1="60" x2="116" y2="80" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <line x1="70" y1="100" x2="116" y2="80" stroke="white" stroke-width="1.2" opacity=".6"/>
+            <!-- input nodes -->
+            <circle cx="24" cy="30" r="7" fill="white" opacity=".9"/>
+            <circle cx="24" cy="60" r="7" fill="white" opacity=".9"/>
+            <circle cx="24" cy="90" r="7" fill="white" opacity=".9"/>
+            <!-- hidden nodes -->
+            <circle cx="70" cy="20" r="9" fill="white" opacity=".75"/>
+            <circle cx="70" cy="60" r="9" fill="white" opacity=".75"/>
+            <circle cx="70" cy="100" r="9" fill="white" opacity=".75"/>
+            <!-- output nodes -->
+            <circle cx="116" cy="40" r="11" fill="white" opacity=".9"/>
+            <circle cx="116" cy="80" r="11" fill="white" opacity=".9"/>
+          </svg>
+          <div class="photo-label">Artificial Intelligence</div>
         </div>
       </div>
       <div class="photo-card">
         <div class="photo-card-inner">
           <span class="photo-num">02</span>
           <span class="photo-star">✦</span>
-          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
-          <div class="photo-label">Strategy</div>
-          <div class="photo-hint">→ add photo</div>
+          <!-- Product graphic: layered roadmap bars -->
+          <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:78%;opacity:.5;" viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- timeline spine -->
+            <line x1="20" y1="10" x2="20" y2="120" stroke="white" stroke-width="2" opacity=".4"/>
+            <!-- roadmap rows -->
+            <rect x="28" y="14" width="90" height="14" rx="2" fill="white" opacity=".85"/>
+            <rect x="28" y="37" width="55" height="14" rx="2" fill="white" opacity=".6"/>
+            <rect x="90" y="37" width="50" height="14" rx="2" fill="white" opacity=".35"/>
+            <rect x="28" y="60" width="70" height="14" rx="2" fill="white" opacity=".7"/>
+            <rect x="28" y="83" width="38" height="14" rx="2" fill="white" opacity=".5"/>
+            <rect x="72" y="83" width="68" height="14" rx="2" fill="white" opacity=".3"/>
+            <rect x="28" y="106" width="110" height="14" rx="2" fill="white" opacity=".45"/>
+            <!-- dot markers on spine -->
+            <circle cx="20" cy="21" r="4" fill="white"/>
+            <circle cx="20" cy="44" r="4" fill="white" opacity=".7"/>
+            <circle cx="20" cy="67" r="4" fill="white" opacity=".7"/>
+            <circle cx="20" cy="90" r="4" fill="white" opacity=".7"/>
+            <circle cx="20" cy="113" r="4" fill="white" opacity=".5"/>
+          </svg>
+          <div class="photo-label">Product</div>
         </div>
       </div>
       <div class="photo-card">
         <div class="photo-card-inner">
           <span class="photo-num">03</span>
-          <svg class="photo-person" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="42" r="32" fill="white"/><path d="M8 200 C8 138 22 118 60 118 C98 118 112 138 112 200" fill="white"/></svg>
-          <div class="photo-label">AI-first</div>
-          <div class="photo-hint">→ add photo</div>
+          <!-- Strategy graphic: pyramid / target chart -->
+          <svg style="position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);width:68%;opacity:.5;" viewBox="0 0 130 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- concentric target rings -->
+            <circle cx="65" cy="55" r="50" stroke="white" stroke-width="2" opacity=".3"/>
+            <circle cx="65" cy="55" r="36" stroke="white" stroke-width="2" opacity=".5"/>
+            <circle cx="65" cy="55" r="22" stroke="white" stroke-width="2" opacity=".7"/>
+            <circle cx="65" cy="55" r="9" fill="white" opacity=".9"/>
+            <!-- crosshairs -->
+            <line x1="65" y1="5" x2="65" y2="105" stroke="white" stroke-width="1.5" opacity=".25"/>
+            <line x1="15" y1="55" x2="115" y2="55" stroke="white" stroke-width="1.5" opacity=".25"/>
+            <!-- arrow -->
+            <line x1="108" y1="12" x2="72" y2="48" stroke="white" stroke-width="2.5" opacity=".8"/>
+            <polygon points="72,48 80,38 82,52" fill="white" opacity=".8"/>
+          </svg>
+          <div class="photo-label">Strategy</div>
         </div>
       </div>
     </div>
@@ -351,7 +401,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
   </div>
 
   <div class="work-grid" id="work-grid">
-    <div class="card wide blue-accent" data-cat="apps" onclick="showBlog('bubble')">
+    <div class="card blue-accent" data-cat="apps" onclick="showBlog('bubble')">
       <div class="card-corner"></div>
       <div>
         <div class="card-tag"><span class="dot dot-blue"></span>Side Project · Shipped</div>
@@ -359,12 +409,6 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
         <div class="card-body">A browser mindfulness app where you pop 36 iridescent bubbles to reveal a hidden painting. ASMR sound design, zero dependencies, one 95KB file. Built for 2–3 minute desk breaks.</div>
         <span class="card-metric">Vibe Coded</span><span class="card-metric">Web Audio API</span><span class="card-metric">Canvas 2D</span>
         <div class="card-read-more">Read the build story</div>
-      </div>
-      <div class="card-right">
-        <div class="card-feature"><strong>Zero dependencies</strong>Every pixel drawn programmatically — no assets, no npm. Ships as a single file.</div>
-        <div class="card-feature"><strong>4-layer sound design</strong>Live synthesised via Web Audio API. Volume rises as you pop more bubbles.</div>
-        <div class="card-feature"><strong>16 procedural artworks</strong>Starry Night, The Great Wave — generated at runtime from math and bezier curves.</div>
-        <div class="card-feature"><strong>Designed for the overlooked</strong>No timer, no score, no failure state. Built for neurodivergent users and anyone who needs 3 minutes back.</div>
       </div>
     </div>
 
@@ -443,7 +487,7 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
       <div class="skills-section-line"></div>
     </div>
     <div class="skills-row">
-      <div class="skill-pill">Product Strategy</div><div class="skill-pill">Product Lifecycle Management</div><div class="skill-pill">Product Roadmap</div><div class="skill-pill">Prototyping</div><div class="skill-pill">User Research</div><div class="skill-pill">Market Research</div><div class="skill-pill">Competitive Intelligence</div><div class="skill-pill">GTM</div><div class="skill-pill">LLM Orchestration</div><div class="skill-pill">Dashboards</div><div class="skill-pill">Excel</div><div class="skill-pill">PowerPoint</div><div class="skill-pill">Claude</div><div class="skill-pill">Gemini</div><div class="skill-pill">Figma</div>
+      <div class="skill-pill">Agile</div><div class="skill-pill">Excel</div><div class="skill-pill">PowerPoint</div><div class="skill-pill">Tableau</div><div class="skill-pill">Claude Code</div><div class="skill-pill">ChatGPT</div><div class="skill-pill">LLM Orchestration</div><div class="skill-pill">Product Strategy</div><div class="skill-pill">Product Lifecycle Management</div><div class="skill-pill">Data Analysis</div><div class="skill-pill">Data Visualization</div><div class="skill-pill">Business Presentations</div><div class="skill-pill">PRD · BRD · FRD Documentation</div><div class="skill-pill">Requirements Gathering &amp; Analysis</div><div class="skill-pill">Stakeholder Management</div><div class="skill-pill">Cross-functional Collaboration</div><div class="skill-pill">Market Research</div><div class="skill-pill">Project Management</div><div class="skill-pill">Prototyping</div>
     </div>
   </div>
 
@@ -453,11 +497,11 @@ footer { background: var(--ink); border-top: var(--border); padding: 28px 48px; 
     <div class="section-num">03</div>
   </div>
   <div class="contact-row" style="margin-bottom:64px;">
-    <a href="mailto:saumya.vatsa@email.com" class="contact-item">
+    <a href="mailto:s.vatsa2015@gmail.com" class="contact-item">
       <div class="contact-icon">✉</div>
       <div class="contact-detail">
         <div class="contact-label">Email</div>
-        <div class="contact-value">saumya.vatsa@email.com</div>
+        <div class="contact-value">s.vatsa2015@gmail.com</div>
       </div>
     </a>
     <a href="https://www.linkedin.com/in/saumya-vatsa-ximb/" target="_blank" class="contact-item">
